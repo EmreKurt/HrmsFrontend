@@ -1,0 +1,82 @@
+.App {
+  text-align: center;
+  background-color: #e1edf2;
+  width: auto;
+}
+
+.ui.main.container {
+  margin-top: 2em;
+  position: relative;
+}
+
+.navi {
+  background-color: #44a1a3 !important;
+}
+
+.aer{
+  color: #8effff;
+}
+.ulti{
+  color: #eeffdd;
+}
+
+.text{
+  font-style: italic;
+  font-size: larger;
+}
+
+.ds{
+  display: inline-block;
+}
+
+.mt10{
+  margin-top: 10px;
+}
+
+.fl-r{
+  float: right;
+}
+
+
+.ac{
+ font-size: 28px;
+ font-style: italic;
+ font-variant: inherit;
+}
+
+
+.login{
+  background-color: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fresimdiyari.com%2F_data%2Fi%2Fupload%2F2012%2F10%2F11%2F20121011142538-0d933501-me.jpg&imgrefurl=https%3A%2F%2Fresimdiyari.com%2Findex.php%3F%2Fcategory%2Farkaplan_resimleri&tbnid=t8AhP__YU4Y7oM&vet=12ahUKEwjjhKr447rxAhWFDuwKHVk3CLAQMygIegUIARDgAQ..i&docid=8ADcjsuOK4fNhM&w=738&h=416&q=arka%20plan%20resimleri&ved=2ahUKEwjjhKr447rxAhWFDuwKHVk3CLAQMygIegUIARDgAQ#imgrc=t8AhP__YU4Y7oM&imgdii=4BBddwkaXmjrFM")
+}
+
+.bg {
+  background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+  height: 50vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity:  80%  ;
+  position: relative;
+  position: center;
+  
+}
+
+.footer{
+  
+  width: 100%;
+
+  position: relative;
+  
+  height: 5.5rem;  
+  margin-bottom: 10em;
+  margin-top: 8rem;
+  padding: 10rem;
+  background-color: rgb(40, 42, 44);
+  color: rgb(255, 255, 255);
+}
+
+.ar{
+  margin-top: 150px;
+}
+
+
