@@ -288,6 +288,7 @@ export default function JobAdvertisementAddPage() {
                         <div className={"ui pointing red basic label"}>
                           {formik.errors.openPosition}
                         </div>
+                        
                       )}
                   </Grid.Column>
                   <Grid.Column width={8}>
