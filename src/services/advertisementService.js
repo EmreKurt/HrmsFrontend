@@ -26,7 +26,7 @@ export default class AdvertisementService {
   }
 
   add(values) {
-    return axios.post("http://localhost:8080/api/jobadvertisement/add", values);
+    return axios.post("http://localhost:8080/api/jobadvertisement/create", values);
   }
 
   getByConfirmFalse() {

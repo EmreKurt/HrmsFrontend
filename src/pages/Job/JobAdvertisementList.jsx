@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Card,
+  Dropdown,
   Grid,
   Icon,
   Image,
@@ -47,7 +48,7 @@ export default function JobAdvertisementList() {
         );
       });
     }
-  }, [filterOption, activePage, pageSize]);
+  }, [filterOption, activePage, pageSize, authItem]);
 
   let favoriteService = new FavoritesService();
   const handleAddToFavorite = (advertisementId) => {
@@ -73,11 +74,12 @@ export default function JobAdvertisementList() {
   };
 
   const handleFilterClick = (filterOption) => {
+    
     if (filterOption.cityId.length === 0) {
       filterOption.cityId = null;
     }
     if (filterOption.positionId.length === 0) {
-      filterOption.jobPositionId = null;
+      filterOption.positionId = null;
     }
     if (filterOption.workTypeId.length === 0) {
       filterOption.workTypeId = null;
@@ -85,26 +87,47 @@ export default function JobAdvertisementList() {
     if (filterOption.workTimeId.length === 0) {
       filterOption.workTimeId = null;
     }
-
+ 
     setFilterOption(filterOption);
     setActivePage(1);
   };
 
+  
+
+  const paginationOptions = [
+    { key: 2, text: "2 İlan", value: 2 },
+    { key: 10, text: "10 İlan", value: 10 },
+    { key: 25, text: "25 İlan", value: 25 },
+    { key: 50, text: "50 İlan", value: 50 },
+    { key: 100, text: "100 İlan", value: 100 },
+  ];
+
   return (
     <div>
-      <JobAdFilter clickEvent={handleFilterClick} />
       <Grid>
-        <Grid.Row></Grid.Row>
-        <Grid.Row></Grid.Row>
-      </Grid>
-      <Card.Group itemsPerRow={2}>
+      <Grid.Column width={5}>
+        
+        <JobAdFilter clickEvent={handleFilterClick} />
+      </Grid.Column>
+     
+     
+      <Grid.Column width={11}>
+      <Card.Group >
         {advertisements?.map((advertisement) => (
-          <Card style={{ borderRadius: "25px" }} onClick="25px">
+          <Card fluid style={{ borderRadius: "25px" }} onClick="25px">
             <Card.Content textAlign="left">
               {authItem[0].user.userType === 1 && (
-
-                <Icon onClick="25px" size="large" color={favorites.includes(advertisement.id)} name={favorites.includes(advertisement.id)?"heart":"heart outline"} onClick={() => handleAddToFavorite(advertisement.id)}/>
-
+                <Icon
+                  onClick="25px"
+                  size="large"
+                  color={favorites.includes(advertisement.id)?"red":"white"}
+                  name={
+                    favorites.includes(advertisement.id)
+                      ? "heart"
+                      : "heart outline"
+                  }
+                  onClick={() => handleAddToFavorite(advertisement.id)}
+                />
               )}
 
               {/* <div className="ds">
@@ -130,10 +153,16 @@ export default function JobAdvertisementList() {
               </h5>
 
               <h5>
-                Başvuru :
+                Başvuru : Son {" "}
                 <span>
-                  {advertisement.releaseDate} |{" "}
-                  {advertisement.applicationDeadline}
+                  {(
+                    (new Date(advertisement.applicationDeadline).getTime() -
+                      new Date(Date.now()).getTime()) /
+                    86400000
+                  )
+                    .toString()
+                    .split(".", 1)}{" "}
+                  gün
                 </span>
               </h5>
 
@@ -170,16 +199,28 @@ export default function JobAdvertisementList() {
       </Grid>
 
       <Card.Content>
-        <div>
-          <Pagination
-            firstItem={null}
-            lastItem={null}
-            activePage={activePage}
-            onPageChange={handlePaginationChange}
-            totalPages={Math.ceil(totalPageSize / pageSize)}
-          />
-        </div>
+        <Pagination
+          firstItem={null}
+          lastItem={null}
+          activePage={activePage}
+          onPageChange={handlePaginationChange}
+          totalPages={Math.ceil(totalPageSize / pageSize)}
+        />
+        {/* <Dropdown 
+          onChange={(e, data) => {
+            setActivePage(1)
+            setPageSize(data.value);
+            handlePaginationSizeChange(data.value);
+          }}
+          selection
+          defaultValue={pageSize}
+          text={"Sayfalama - " + pageSize}
+          style={{ float: "right" }}
+          options={paginationOptions}
+      /> */}
       </Card.Content>
+      </Grid.Column>
+      </Grid>
     </div>
   );
 }

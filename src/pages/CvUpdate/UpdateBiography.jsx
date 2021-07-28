@@ -1,7 +1,7 @@
 import { Field, useFormik } from "formik";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { Form, Button, FormField } from "semantic-ui-react";
+import { Form, Button, FormField, Icon } from "semantic-ui-react";
 import * as Yup from "yup";
 import CvService from "../../services/cvService";
 
@@ -33,6 +33,8 @@ export default function UpdateBiography({
   return (
     <div>
       <Form size="large" onSubmit={formik.handleSubmit}>
+      
+        
         <label>
           <b>Biyografi</b>
         </label>

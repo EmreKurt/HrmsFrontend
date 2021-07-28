@@ -24,9 +24,7 @@ export default class MenuExamplePointing extends Component {
               <Menu.Item name="İş Arayanlar" onClick={this.handleItemClick} />
             </Link>
 
-            <Link to={`/cv`}>
-              <Menu.Item name="Cvler" onClick={this.handleItemClick} />
-            </Link>
+           
             <Menu.Menu position="right">
               <Menu.Item>
                 <Input icon="search" placeholder="Search..." />
