@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #e1edf2;
+  background-color: #cad0d3;
   width: auto;
 }
 
@@ -8,6 +8,8 @@
   margin-top: 2em;
   position: relative;
 }
+
+
 
 .navi {
   background-color: #44a1a3 !important;

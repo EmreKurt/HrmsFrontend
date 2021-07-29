@@ -14,8 +14,8 @@ export default class MenuExamplePointing extends Component {
 
     return (
       <div>
-        <Menu pointing>
-          <Container>
+        <Menu pointing >
+          <Container >
             <Link to={`/advertisements`}>
               <Menu.Item name="İş İlanları" onClick={this.handleItemClick} />
             </Link>

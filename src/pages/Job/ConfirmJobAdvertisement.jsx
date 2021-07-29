@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Container, Icon, Segment } from "semantic-ui-react";
 import AdvertisementService from "../../services/advertisementService";
-import {
-    Table,
-    Card,
-    Button,
-    Divider,
-  } from "semantic-ui-react";
-  import swal from "sweetalert";
+import { Table, Card, Button, Divider } from "semantic-ui-react";
+import swal from "sweetalert";
+import { useSelector } from "react-redux";
 
 export default function ConfirmJobAdvertisement() {
+  const { authItem } = useSelector((state) => state.auth);
   const [jobAdvertisements, setJobAdvertisements] = useState([]);
   let jobAdvertisementService = new AdvertisementService();
 
   useEffect(() => {
     let jobAdvertisementService = new AdvertisementService();
     jobAdvertisementService
-      .getByConfirmFalse()
+      .getAllPassiveJob()
       .then((result) => setJobAdvertisements(result.data.data));
   }, []);
 
-  const confirmStatusTrue = (jobAdvertisementId) => {
-    jobAdvertisementService.confirm(jobAdvertisementId).then(
+  const active = (id) => {
+    jobAdvertisementService.activate(id, true).then(
       swal({
         title: "Başarılı!",
         text: "İş ilanı onaylandı!",
@@ -33,24 +30,36 @@ export default function ConfirmJobAdvertisement() {
     );
   };
 
-  const deleteJob = (jobAdvertisementId) => {
-    jobAdvertisementService.delete(jobAdvertisementId).then(
-      swal({
-        title: "Emin Misiniz?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
+  const deleteJob = (id) => {
+    swal({
+      title: "Emin Misiniz?",
+      text: "Bir kez silindiğinde, bu iş ilanını geri alamazsınız!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        jobAdvertisementService.delete(id).then(
           swal("İş ilanı silindi.", { icon: "success" }).then(function () {
             window.location.reload();
-          });
-        }
-      })
-    );
+          })
+        );
+      } else {
+        swal("İptal edildi!");
+      }
+    });
   };
   return (
-   <div>
+    <div>
+       {authItem[0].user.userType !== 3 && (
+        <div className="ui negative message">
+          <div className="header">Bu sayfayı görüntülemeye yetkiniz yok</div>
+          <p>
+            Giriş yapmayı yada bir iş veren hesabı oluşturmayı deneyebilirsiniz
+          </p>
+        </div>
+      )}
+      {authItem[0].loggedIn && authItem[0].user.userType === 3 && (
       <Segment style={{ padding: "12em 0em" }} vertical>
         <Container>
           <Card fluid color="orange">
@@ -66,7 +75,7 @@ export default function ConfirmJobAdvertisement() {
             <Card.Content>
               <Table color="orange">
                 <Table.Header>
-                  <Table.Row>
+                  <Table.Row textAlign="center">
                     <Table.HeaderCell>Firma Adı</Table.HeaderCell>
                     <Table.HeaderCell>Şehir</Table.HeaderCell>
                     <Table.HeaderCell>Pozisyon</Table.HeaderCell>
@@ -80,17 +89,13 @@ export default function ConfirmJobAdvertisement() {
 
                 <Table.Body>
                   {jobAdvertisements.map((jobAdvertisement) => (
-                    <Table.Row key={jobAdvertisement.id}>
+                    <Table.Row key={jobAdvertisement.id} textAlign="center">
                       <Table.Cell>
                         {jobAdvertisement.employer.companyName}
                       </Table.Cell>
-                      <Table.Cell>{jobAdvertisement.city.cityName} </Table.Cell>
-                      <Table.Cell>
-                        {jobAdvertisement.jobPosition.name}
-                      </Table.Cell>
-                      <Table.Cell>
-                        {jobAdvertisement.numberOfOpenPositions}
-                      </Table.Cell>
+                      <Table.Cell>{jobAdvertisement.city.name} </Table.Cell>
+                      <Table.Cell>{jobAdvertisement.position.name}</Table.Cell>
+                      <Table.Cell>{jobAdvertisement.openPosition}</Table.Cell>
                       <Table.Cell>
                         {jobAdvertisement.applicationDeadline}
                       </Table.Cell>
@@ -99,7 +104,7 @@ export default function ConfirmJobAdvertisement() {
                         {jobAdvertisement.maxSalary}
                       </Table.Cell>
                       <Table.Cell>
-                        {jobAdvertisement.confirmStatus === false
+                        {jobAdvertisement.isActive === true
                           ? "Onaylandı"
                           : "Onaylanmadı"}
                       </Table.Cell>
@@ -108,9 +113,7 @@ export default function ConfirmJobAdvertisement() {
                           animated
                           basic
                           color="green"
-                          onClick={(e) =>
-                            confirmStatusTrue(jobAdvertisement.id)
-                          }
+                          onClick={(e) => active(jobAdvertisement.id)}
                         >
                           <Button.Content visible>Onayla</Button.Content>
                           <Button.Content hidden>
@@ -126,7 +129,7 @@ export default function ConfirmJobAdvertisement() {
                         >
                           <Button.Content visible>İlanı Sil</Button.Content>
                           <Button.Content hidden>
-                            <Icon name="delete" />
+                            <Icon name="trash alternate" />
                           </Button.Content>
                         </Button>
                       </Table.Cell>
@@ -138,6 +141,7 @@ export default function ConfirmJobAdvertisement() {
           </Card>
         </Container>
       </Segment>
+      )}
     </div>
   );
 }

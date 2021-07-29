@@ -23,7 +23,7 @@ export default function SignedIn({ signOut }) {
       <Menu.Item>
         {authItem[0].user.userType === 2 && (
           <Link to={`/addJobAdvertisement`}>
-            <Button color="google plus">İlan Ekle</Button>
+            <Button color="google plus" type="submit">İlan Ekle</Button>
           </Link>
         )}
         <Grid>

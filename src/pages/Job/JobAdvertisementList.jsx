@@ -114,7 +114,7 @@ export default function JobAdvertisementList() {
       <Grid.Column width={11}>
       <Card.Group >
         {advertisements?.map((advertisement) => (
-          <Card fluid style={{ borderRadius: "25px" }} onClick="25px">
+          <Card fluid style={{ borderRadius: "25px" }} onClick="25px" >
             <Card.Content textAlign="left">
               {authItem[0].user.userType === 1 && (
                 <Icon
@@ -171,7 +171,7 @@ export default function JobAdvertisementList() {
               </h5>
 
               <h5>
-                <Icon name="location arrow" />{" "}
+                <Icon name="map marker alternate" />{" "}
                 <span>{advertisement.city.name}</span>
               </h5>
 

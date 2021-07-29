@@ -82,8 +82,10 @@ export default function JobAdFilter({ clickEvent }) {
 
   return (
     <div>
+
       <Card itemsPerRow={2}>
-        <Segment>
+       
+        <Segment >
           <Segment color="black" raised>
             <Label size="large">Şehir</Label>
             <Dropdown
@@ -155,6 +157,7 @@ export default function JobAdFilter({ clickEvent }) {
           Filtrele
         </Button>
         </Segment>
+        
       </Card>
     </div>
   );

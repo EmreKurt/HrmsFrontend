@@ -36,7 +36,7 @@ export default function Navi() {
         <Container>
           <Menu.Item className="text">
             
-          <Link to={`/homepage`}>
+          <Link to={`/`}>
           <div className="ulti">
             <Icon  name="braille"/>
               <b className="aer">H</b>uman <b className="aer">R</b>esources <b className="aer">M</b>anagement <b className="aer">S</b>ystem
