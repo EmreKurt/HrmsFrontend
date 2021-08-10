@@ -5,17 +5,19 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { Card, Table, Button, Form, Grid } from "semantic-ui-react";
 import CvService from "../../services/cvService";
+import { useParams } from "react-router-dom";
 
 export default function UpdateSchools({ cvId, updateCvValues }) {
-  let [schools, setSchools] = useState([]);
+  let { id } = useParams();
+  let [cv, setCv] = useState([]);
   let schoolService = new SchoolService();
   let cvService = new CvService();
   useEffect(() => {
-    let schoolService = new SchoolService();
-    schoolService.getByCvId(cvId).then((result) => {
-      setSchools(result.data.data);
+    let cvService = new CvService();
+    cvService.getBySchoolId(id).then((result) => {
+      setCv(result.data.data);
     });
-  }, [cvId]);
+  }, [id]);
 
   let schoolAddSchema = Yup.object().shape({
     departmentName: Yup.string()
@@ -43,7 +45,7 @@ export default function UpdateSchools({ cvId, updateCvValues }) {
         .then((result) => {
           toast.success(result.data.message);
           schoolService.getByCvId(cvId).then((result) => {
-            setSchools(result.data.data);
+            setCv(result.data.data);
           });
           updateCvValues();
         })
@@ -54,12 +56,12 @@ export default function UpdateSchools({ cvId, updateCvValues }) {
   });
 
   const handleDeleteScholl = (schoolId) => {
-    schoolService
+    cvService
       .deleteSchool(schoolId)
       .then((result) => {
         toast.success(result.data.message);
-        schoolService.getByCvId(cvId).then((result) => {
-          setSchools(result.data.data);
+        cvService.getBySchoolId(id).then((result) => {
+          setCv(result.data.data);
         });
         updateCvValues();
       })
@@ -83,18 +85,18 @@ export default function UpdateSchools({ cvId, updateCvValues }) {
           </Table.Header>
 
           <Table.Body>
-            {schools?.map((school) => (
-              <Table.Row key={school.id}>
-                <Table.Cell>{school.schoolName}</Table.Cell>
-                <Table.Cell>{school.departmentName}</Table.Cell>
-                <Table.Cell>{school.startYear}</Table.Cell>
-                <Table.Cell>{school.graduationYear}</Table.Cell>
+            {cv?.map((cvs) => (
+              <Table.Row key={cvs.school?.id}>
+                <Table.Cell>{cvs.school?.schoolName}</Table.Cell>
+                <Table.Cell>{cvs.school?.departmentName}</Table.Cell>
+                <Table.Cell>{cvs.school?.startYear}</Table.Cell>
+                <Table.Cell>{cvs.school?.graduationYear}</Table.Cell>
                 <Table.Cell>
                   <Button
                     color="red"
                     icon="x"
                     circular
-                    onClick={() => handleDeleteScholl(school.id)}
+                    onClick={() => handleDeleteScholl(cv.school?.id)}
                   ></Button>
                 </Table.Cell>
               </Table.Row>

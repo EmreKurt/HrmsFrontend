@@ -37,4 +37,8 @@ export default class CvService{
     updateLinkedin(cvId,linkedin){
         return axios.put(`http://localhost:8080/api/cv/updateLinkedin?cvId=${cvId}&linkedinlink=${linkedin}`)
     }
+
+    deleteSchool(id){
+        return axios.delete(`http://localhost:8080/api/cv/deleteSchool?id=${id}`)
+    }
 } 

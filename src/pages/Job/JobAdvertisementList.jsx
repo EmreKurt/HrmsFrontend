@@ -17,12 +17,13 @@ import { addToFavorite } from "../../store/actions/cartActions";
 import { toast } from "react-toastify";
 import JobAdFilter from "./JobAdFilter";
 import { result } from "lodash";
+import swal from "sweetalert";
 
 export default function JobAdvertisementList() {
   const dispatch = useDispatch();
   let [activePage, setActivePage] = useState(1);
   let [filterOption, setFilterOption] = useState({});
-  let [pageSize, setPageSize] = useState(2);
+  let [pageSize, setPageSize] = useState(3);
   let [totalPageSize, setTotalPageSize] = useState(0);
 
   const [advertisements, setAdvertisement] = useState([]);
@@ -55,13 +56,29 @@ export default function JobAdvertisementList() {
     favoriteService
       .addFavorite(authItem[0].user.id, advertisementId)
       .then((result) => {
-        toast.success(result.data.message);
+        //toast.success(result.data.message);
+        if (result.data.success === true) {
+          swal({
+            title: "Başarılı!",
+            text: result.data.message,
+            icon: "success",
+            button: "Ok",
+           })
+         }
+         //else {
+        //   swal({
+        //     title: "İşlem Başarısız!",
+        //     text: result.response.data.message,
+        //     icon: "error",
+        //     button: "Ok",
+        //   });
+        // }
         favorites.push(advertisementId);
         setFavorites([...favorites]);
-      })
-      .catch((result) => {
+      }).catch((result) => {
         toast.error(result.response.data.message);
-      });
+         });
+      
   };
 
   const handlePaginationChange = (e, { activePage }) => {
@@ -104,6 +121,7 @@ export default function JobAdvertisementList() {
 
   return (
     <div>
+      
       <Grid>
       <Grid.Column width={5}>
         
@@ -112,9 +130,11 @@ export default function JobAdvertisementList() {
      
      
       <Grid.Column width={11}>
+     
       <Card.Group >
         {advertisements?.map((advertisement) => (
-          <Card fluid style={{ borderRadius: "25px" }} onClick="25px" >
+           
+          <Card fluid style={{ borderRadius: "25px" }} onClick="25px" color='black' >
             <Card.Content textAlign="left">
               {authItem[0].user.userType === 1 && (
                 <Icon
@@ -178,20 +198,21 @@ export default function JobAdvertisementList() {
               <Card.Content extra>
                 <div>
                   <Link as={Link} to={`/advertisements/${advertisement.id}`}>
-                    <Button color="olive" floated="right">
-                      Detay
+                    <Button animated size="large" circular="0px" color="olive" floated="right">
+                    <Button.Content visible>Detay</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name="arrow right" />
+                      </Button.Content>
                     </Button>
                   </Link>
-                  <Button color="green" floated="right">
-                    <Icon name="edit outline" />
-                    İlana Başvur
-                  </Button>
                 </div>
               </Card.Content>
             </Card.Content>
           </Card>
+           
         ))}
       </Card.Group>
+     
 
       <Grid>
         <Grid.Row></Grid.Row>
@@ -221,6 +242,7 @@ export default function JobAdvertisementList() {
       </Card.Content>
       </Grid.Column>
       </Grid>
+      
     </div>
   );
 }

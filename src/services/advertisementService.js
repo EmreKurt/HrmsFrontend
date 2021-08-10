@@ -78,4 +78,11 @@ export default class AdvertisementService {
       "http://localhost:8080/api/jobadvertisement/getAllActiveFalse"
     );
   }
+
+  getActiveAdsByCompanyId(id) {
+    return axios.get(
+      "http://localhost:8080/api/jobadvertisement/getActiveAndCompanyId?companyId=" +
+        id
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import { ADD_TO_FAVORİTE, DELETE_FROM_FAVORİTE } from "../actions/cartActions";
+import { ADD_TO_FAVORITE, DELETE_FROM_FAVORITE } from "../actions/cartActions";
 import { cartItems } from "../initialValues/cartItems";
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function cartReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case ADD_TO_FAVORİTE:
+    case ADD_TO_FAVORITE:
       let advertisement = state.cartItems.find(
         (c) => c.advertisement.id === payload.id
       );
@@ -25,11 +25,12 @@ export default function cartReducer(state = initialState, { type, payload }) {
           ],
         };
       }
-    case DELETE_FROM_FAVORİTE:
+    case DELETE_FROM_FAVORITE:
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          (c) => c.advertisement.id !== payload.id),
+          (c) => c.advertisement.id !== payload.id
+        ),
       };
 
     default:

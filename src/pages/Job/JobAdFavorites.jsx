@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Card, Grid, Icon, Button } from "semantic-ui-react";
 import FavoritesService from "../../services/favoritesService";
+import swal from "sweetalert";
 
 export default function JobAdFavorites() {
   const { authItem } = useSelector((state) => state.auth);
@@ -25,7 +26,15 @@ export default function JobAdFavorites() {
         setFavorites(
           favorites.filter((favoriAd) => favoriAd.id !== favoriteId)
         );
-        toast.success(result.data.message);
+        if (result.data.success === true) {
+          swal({
+            title: "Başarılı!",
+            text: result.data.message,
+            icon: "success",
+            button: "Ok",
+          });
+        }
+        //toast.info(result.data.message);
       })
       .catch((result) => {
         toast.error(result.response.data.message);
@@ -33,14 +42,30 @@ export default function JobAdFavorites() {
   };
   return (
     <div>
-        {authItem[0].loggedIn === false && (
+      <Grid>
+        <Grid.Row></Grid.Row>
+        <Grid.Row></Grid.Row>
+        <Grid.Row></Grid.Row>
+      </Grid>
+      {favorites?.length === 0 && authItem[0].loggedIn === true &&(
         <div className="ui negative message">
-          <div className="header">Bu sayfayı görüntülemeye yetkiniz yok</div>
+          <p></p>
+          <div className="header">Favorilerinizde ilan bulunamadı...</div>
+          <p></p>
           <p>
-            Bu sayfayı görüntülemek için lütfen giriş yapınız 
+            <Link className="erak" to="/advertisements"> Şimdi ilanları görüntüle</Link>'ye
+            tıklayarak iş ilanlarını inceleyebilirsiniz.
           </p>
         </div>
       )}
+      
+      {authItem[0].loggedIn === false && (
+        <div className="ui negative message">
+          <div className="header">Bu sayfayı görüntülemeye yetkiniz yok</div>
+          <p>Bu sayfayı görüntülemek için lütfen giriş yapınız</p>
+        </div>
+      )}
+      
       {favorites?.map((favorite) => (
         <Card fluid color={"black"} style={{ borderRadius: "25px" }}>
           <Card.Content>

@@ -4,6 +4,7 @@ import {
   Card,
   Checkbox,
   Dropdown,
+  Grid,
   Label,
   Menu,
   Segment,
@@ -82,12 +83,12 @@ export default function JobAdFilter({ clickEvent }) {
 
   return (
     <div>
-
       <Card itemsPerRow={2}>
-       
-        <Segment >
+        <Segment>
           <Segment color="black" raised>
-            <Label size="large">Şehir</Label>
+            <Label attached="top" size="large">
+              Şehir
+            </Label>
             <Dropdown
               placeholder="Şehir seçiniz"
               selection
@@ -105,59 +106,62 @@ export default function JobAdFilter({ clickEvent }) {
             <Label attached="top" size="large">
               İş Pozisyonu
             </Label>
+
             {jobPositions.map((position) => (
+              <div className="leo">
+                <Checkbox
+                  key={position.id}
+                  label={position.name}
+                  onChange={handleChangeJobPosition}
+                  value={position.id}
+                />
+              </div>
+            ))}
+          </Segment>
+          <Segment color="black" raised>
+            <Label attached="top" size="large">
+              Çalışma Yeri
+            </Label>
+            {workPlaces.map((workType) => (
+              <div className="leo">
+                <Checkbox
+                  key={workType.id}
+                  label={workType.workType}
+                  onChange={handleChangeWorkPlace}
+                  value={workType.id}
+                />
+              </div>
+            ))}
+          </Segment>
+          <Segment color="black" raised>
+            <Label attached="top" size="large">
+              Çalışma Süresi
+            </Label>
+            {workTimes.map((workTime) => (
               <Checkbox
-              
-                key={position.id}
-                label={position.name}
-                onChange={handleChangeJobPosition}
-                value={position.id}
+                key={workTime.id}
+                label={workTime.workTime}
+                onChange={handleChangeWorkTime}
+                value={workTime.id}
               />
             ))}
           </Segment>
-        <Segment color="black" raised>
-          <Label attached="top" size="large">
-            Çalışma Yeri
-          </Label>
-          {workPlaces.map((workType) => (
-            <Checkbox
-              key={workType.id}
-              label={workType.workType}
-              onChange={handleChangeWorkPlace}
-              value={workType.id}
-            />
-          ))}
+          <Button
+            type="button"
+            fluid
+            color="green"
+            onClick={() =>
+              clickEvent({
+                cityId: cityIndex,
+                positionId: jobPositionIndex,
+                workTypeId: workPlaceIndex,
+                workTimeId: workTimeIndex,
+              })
+            }
+          >
+            Filtrele
+          </Button>
         </Segment>
-        <Segment color="black" raised>
-          <Label attached="top" size="large">
-            Çalışma Süresi
-          </Label>
-          {workTimes.map((workTime) => (
-            <Checkbox
-              key={workTime.id}
-              label={workTime.workTime}
-              onChange={handleChangeWorkTime}
-              value={workTime.id}
-            />
-          ))}
-        </Segment>
-        <Button
-          type="button"
-          fluid
-          color="green"
-          onClick={() =>
-            clickEvent({
-              cityId: cityIndex,
-              positionId: jobPositionIndex,
-              workTypeId: workPlaceIndex,
-              workTimeId: workTimeIndex,
-            })
-          }
-        >
-          Filtrele
-        </Button>
-        </Segment>
-        
       </Card>
     </div>
   );

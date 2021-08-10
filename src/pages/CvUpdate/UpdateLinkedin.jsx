@@ -2,8 +2,9 @@ import React from "react";
 import CvService from "../../services/cvService";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Icon } from "semantic-ui-react";
 import { toast } from "react-toastify";
+import swal from "sweetalert";
 
 export default function UpdateLinkedin({ cvId, updateCvValues }) {
   let cvService = new CvService();
@@ -20,17 +21,33 @@ export default function UpdateLinkedin({ cvId, updateCvValues }) {
       cvService
         .updateLinkedin(cvId, values.linkedinAdress)
         .then((result) => {
-          toast.success(result.data.message);
+          //toast.success(result.data.message);
+          if (result.data.success === true) {
+            swal({
+              title: "Başarılı!",
+              text: "Güncelleme işleminiz tamamlandı!",
+              icon: "success",
+              button: "Ok",
+            }).then(function () {
+              window.location.reload();
+            });
+          } else {
+            swal({
+              title: "İşlem Başarısız!",
+              text: result.data.message,
+              icon: "error",
+              button: "Ok",
+            });
+          }
           updateCvValues();
         })
-        .catch((result) => {
-          toast.error(result.response.data.message);
-        });
+        
     },
   });
   return (
     <div>
       <Form size="large" onSubmit={formik.handleSubmit}>
+     
         <label>
           <b>Linkedin Link</b>
         </label>

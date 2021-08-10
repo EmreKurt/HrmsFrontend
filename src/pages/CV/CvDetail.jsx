@@ -20,25 +20,6 @@ export default function CvDetail() {
     cvService.getBySeekerId(id).then((result) => setCv(result.data.data));
   }, [id]);
 
-  useEffect(() => {
-    let cvService = new CvService();
-    cvService.getBySchoolId(id).then((result) => setCv(result.data.data));
-  }, [id]);
-
-  useEffect(() => {
-    let cvService = new CvService();
-    cvService.getByExperienceId(id).then((result) => setCv(result.data.data));
-  }, [id]);
-
-  useEffect(() => {
-    let cvService = new CvService();
-    cvService.getByLanguageId(id).then((result) => setCv(result.data.data));
-  }, [id]);
-
-  useEffect(() => {
-    let cvService = new CvService();
-    cvService.getByImageId(id).then((result) => setCv(result.data.data));
-  }, [id]);
 
   const updateCvValues = () => {
     cvService.getBySeekerId(id).then((result) => {
@@ -169,7 +150,9 @@ export default function CvDetail() {
       <Card fluid color={"olive"}>
         <Card.Content>
           <Card.Header textAlign="center">Okuduğu Okullar
-         
+          {/* <Popup onClose trigger={<button className="ui button" style={{marginLeft:"1em"}}> Güncelle </button>} modal>
+                            <UpdateSchools cvId={cv.id} updateCvValues={updateCvValues}/>
+                          </Popup> */}
                           </Card.Header>
         </Card.Content>
         <Table celled color={"olive"} textAlign="center">
@@ -198,7 +181,7 @@ export default function CvDetail() {
           </Table.Body>
         </Table>
       </Card>
-
+      
       <Card fluid color={"black"}>
         <Card.Content>
           <Card.Header>İş Tecrübeleri</Card.Header>
@@ -219,11 +202,11 @@ export default function CvDetail() {
               <Table.Cell>{cv.jobExperience?.position}</Table.Cell>
               <Table.Cell>{cv.jobExperience?.startYear}</Table.Cell>
               <Table.Cell>
-                {cv.jobExperience?.leavingWorkYear ? (
+                {cv.jobExperience?.leavingWorkYear ? 
                   cv.jobExperience?.leavingWorkYear
-                ) : (
+                 : 
                   <p>Devam Ediyor</p>
-                )}
+                }
               </Table.Cell>
             </Table.Row>
           </Table.Body>

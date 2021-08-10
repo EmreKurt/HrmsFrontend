@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Grid, Header, Icon, Table } from "semantic-ui-react";
 import AdvertisementService from "../../services/advertisementService";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function JobAdvertisementDetail() {
   let { id } = useParams();
@@ -16,13 +17,13 @@ export default function JobAdvertisementDetail() {
   }, [id]);
   return (
     <div>
-      <Card fluid color={"black"}>
+      <Card fluid color={"black"} style={{ borderRadius: "25px" }}>
         <Card.Content header="Açıklama" />
         <Card.Content>{advertisements.jobDescription}</Card.Content>
       </Card>
       <Grid>
         <Grid.Column width={5}>
-          <Table celled color={"black"} stackable>
+          <Table celled color={"black"} stackable textAlign="center">
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>İş veren</Table.HeaderCell>
@@ -75,7 +76,44 @@ export default function JobAdvertisementDetail() {
                     </Header.Content>
                   </Header>
                 </Table.Cell>
-                <Table.Cell>{advertisements.employer?.webSite}</Table.Cell>
+                <Table.Cell>
+                  <a
+                    href={advertisements.employer?.webSite}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
+                  >
+                    <Button animated color="twitter">
+                      
+                      <Button.Content visible><Icon name="world" color="olive" />Web Site</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name="angle double right" />
+                      </Button.Content>
+                    </Button>
+                  </a>
+                </Table.Cell>
+              </Table.Row>
+
+              <Table.Row textAlign="left">
+                <Table.Cell>
+                  <Header as="h4" image>
+                    <Header.Content>
+                      <Icon name="list ul" />
+                      Detay
+                    </Header.Content>
+                  </Header>
+                </Table.Cell>
+                <Table.Cell>
+                  <Button
+                    animated
+                    as={Link}
+                    to={`/employers/${advertisements.employer?.id}`}
+                  >
+                    <Button.Content visible>Detaylara Git</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="angle double right" />
+                    </Button.Content>
+                  </Button>
+                </Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>

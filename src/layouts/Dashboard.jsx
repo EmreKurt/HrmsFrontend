@@ -16,6 +16,8 @@ import { ToastContainer } from "react-toastify";
 import RegisterEmployer from "../pages/RegisterEmployer";
 import UpdateBiography from "../pages/CvUpdate/UpdateBiography";
 import JobAdFavorites from "../pages/Job/JobAdFavorites";
+import Employer from "../pages/Employer/Employer";
+import EmployerDetail from "../pages/Employer/EmployerDetail";
 
 export default function Dashboard() {
 
@@ -40,6 +42,8 @@ export default function Dashboard() {
             <Route exact path ="/registerEmployer" component={RegisterEmployer}/>
             <Route exact path ="/updateBiography" component={UpdateBiography}/>
             <Route exact path ="/jobAdFavorites" component={JobAdFavorites}/>
+            <Route exact path ="/employers" component={Employer}/>
+            <Route exact path ="/employers/:id" component={EmployerDetail}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

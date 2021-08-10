@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Button,
+  Card,
   Divider,
   Form,
   Grid,
@@ -8,6 +9,8 @@ import {
   Image,
   Menu,
   Segment,
+  SegmentGroup,
+  Table,
 } from "semantic-ui-react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -41,12 +44,15 @@ export default function LoginList({ signIn }) {
     },
     validationSchema: userLoginSchema,
     onSubmit: (values) => {
-      userService.login(values).then((result) => {
-        handleLogin(result.data.data);
-        history.push("/");
-      }).catch((result) => {
-        toast.error(result.response.data.message)
-      })
+      userService
+        .login(values)
+        .then((result) => {
+          handleLogin(result.data.data);
+          history.push("/");
+        })
+        .catch((result) => {
+          toast.error(result.response.data.message);
+        });
     },
   });
 
@@ -57,17 +63,19 @@ export default function LoginList({ signIn }) {
         <Grid.Row></Grid.Row>
       </Grid>
       <Grid>
-      <Grid.Column width={8}>
-      <Grid>
-        <Grid.Row></Grid.Row>
-        <Grid.Row></Grid.Row>
-        
-      </Grid>
-        <Image
-        src="https://www.cutehr.io/wp-content/uploads/2019/04/HRMS-Key-Features.jpg"
-        size="huge"
-       />
-      </Grid.Column>
+        <Grid.Column width={8}>
+          <Segment  placeholder="39d8">
+            <Grid>
+              <Grid.Row></Grid.Row>
+              <Grid.Row></Grid.Row>
+            </Grid>
+
+            <Image
+              src="https://www.cutehr.io/wp-content/uploads/2019/04/HRMS-Key-Features.jpg"
+              size="huge"
+            />
+          </Segment>
+        </Grid.Column>
         <Grid.Column width={8}>
           <Form size="large" onSubmit={formik.handleSubmit}>
             <Segment stacked color="violet">

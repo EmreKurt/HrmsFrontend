@@ -70,9 +70,9 @@ export default function AddJobAdvertisement() {
             text: "Sistem yöneticisi tarafından ilanınızın onaylanmasını bekleyiniz!",
             icon: "success",
             button: "Ok",
-          }).then(function () {
-            window.location.reload();
-          });
+           })//.then(function () {
+          //   window.location.reload();
+          // });
         } else {
           swal({
             title: "İşlem Başarısız!",

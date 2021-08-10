@@ -35,13 +35,14 @@ export default function Navi() {
       <Menu size="huge" inverted className="navi">
         <Container>
           <Menu.Item className="text">
-            
-          <Link to={`/`}>
-          <div className="ulti">
-            <Icon  name="braille"/>
-              <b className="aer">H</b>uman <b className="aer">R</b>esources <b className="aer">M</b>anagement <b className="aer">S</b>ystem
-              </div>
+           
+          <Link to={`/`} >
+            {/* <Icon  name="braille"/><b>   </b>
+              <b className="aer">H</b> <b className="aer">R</b> <b className="aer">M</b> <b className="aer">S</b> */}
+
+              HRMS <span className='text-secondary'>Project</span>
             </Link>
+            
             
           </Menu.Item>
 

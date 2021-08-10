@@ -4,6 +4,9 @@ import { toast } from "react-toastify";
 import { Form, Button, FormField, Icon } from "semantic-ui-react";
 import * as Yup from "yup";
 import CvService from "../../services/cvService";
+import swal from "sweetalert";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function UpdateBiography({
   cvId,
@@ -22,19 +25,34 @@ export default function UpdateBiography({
     validationSchema: updateSchema,
     onSubmit: (values) => {
       cvService.updateBiography(cvId, values.coverLatter).then((result) => {
-        toast.success(result.data.message);
+        //toast.success(result.data.message);
+        if (result.data.success === true) {
+          swal({
+            title: "Başarılı!",
+            text: "Güncelleme işleminiz tamamlandı!",
+            icon: "success",
+            button: "Ok",
+          }).then(function () {
+            window.location.reload();
+          });
+        } else {
+          swal({
+            title: "İşlem Başarısız!",
+            text: result.data.message,
+            icon: "error",
+            button: "Ok",
+          });
+        }
         updateCvValues();
       });
     },
   });
 
-
+  const { authItem } = useSelector((state) => state.auth);
 
   return (
     <div>
       <Form size="large" onSubmit={formik.handleSubmit}>
-      
-        
         <label>
           <b>Biyografi</b>
         </label>

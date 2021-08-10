@@ -7,7 +7,7 @@ export default class FavoritesService{
     }
 
     addFavorite(seekerId,jobAdId ){
-        return axios.post(`http://localhost:8080/jobAdFavorites/addFavorite?seekerId=${seekerId}&jobAdId=${jobAdId }`)
+        return axios.post(`http://localhost:8080/jobAdFavorites/addFavorite?seekerId=${seekerId}&jobAdId=${jobAdId}`)
     }
 
     removeFavorite(favoriteId){

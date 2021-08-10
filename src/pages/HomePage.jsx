@@ -35,8 +35,8 @@ class HomePage extends React.Component {
                                 </Item.Description>
                                 <Item.Extra style={{ marginTop: "2em" }}>{t("Vakit kaybetmeyin, Bize katılın ve İş/Şirket Uyumunu bulun!!!")}</Item.Extra>
                                 <Menu.Item>
-                                    <Button as={NavLink} to="/login" style={{ marginTop: "3em" }}>{t("Giriş Yap")}</Button>
-                                    <Button as={NavLink} to="/recort" positive style={{ marginLeft: "0.5em" }}>{t("Kayıt Ol")}</Button>
+                                    <Button size="large" as={NavLink} to="/login" style={{ marginTop: "4em" }}>{t("Giriş Yap")}</Button>
+                                    <Button size="large" as={NavLink} to="/recort" positive style={{ marginLeft: "0.6em" }}>{t("Kayıt Ol")}</Button>
                                 </Menu.Item>
                             </Item.Content>
                         </Item>
