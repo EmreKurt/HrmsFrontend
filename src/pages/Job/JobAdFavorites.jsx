@@ -47,25 +47,28 @@ export default function JobAdFavorites() {
         <Grid.Row></Grid.Row>
         <Grid.Row></Grid.Row>
       </Grid>
-      {favorites?.length === 0 && authItem[0].loggedIn === true &&(
+      {favorites?.length === 0 && authItem[0].loggedIn === true && (
         <div className="ui negative message">
           <p></p>
           <div className="header">Favorilerinizde ilan bulunamadı...</div>
           <p></p>
           <p>
-            <Link className="erak" to="/advertisements"> Şimdi ilanları görüntüle</Link>'ye
-            tıklayarak iş ilanlarını inceleyebilirsiniz.
+            <Link className="erak" to="/advertisements">
+              {" "}
+              Şimdi ilanları görüntüle
+            </Link>
+            'ye tıklayarak iş ilanlarını inceleyebilirsiniz.
           </p>
         </div>
       )}
-      
+
       {authItem[0].loggedIn === false && (
         <div className="ui negative message">
           <div className="header">Bu sayfayı görüntülemeye yetkiniz yok</div>
           <p>Bu sayfayı görüntülemek için lütfen giriş yapınız</p>
         </div>
       )}
-      
+
       {favorites?.map((favorite) => (
         <Card fluid color={"black"} style={{ borderRadius: "25px" }}>
           <Card.Content>
@@ -86,6 +89,7 @@ export default function JobAdFavorites() {
                     circular
                     onClick={() => handleRemoveFavorite(favorite.id)}
                   />
+
                 </Card.Description>
               </div>
               Maaş :
@@ -118,13 +122,19 @@ export default function JobAdFavorites() {
             </h5>
 
             <h5>
-              <Icon name="location arrow" />{" "}
+              <Icon name="map marker alternate" />{" "}
               <span>{favorite.advertisement.city.name}</span>
             </h5>
 
             <Link as={Link} to={`/advertisements/${favorite.advertisement.id}`}>
-              <Button color="vk" floated="right">
-                Detayları gör
+              <Button animated color="vk" floated="right">
+                <Button.Content visible>
+                  <Icon name="list ul" />
+                  Detayları gör
+                </Button.Content>
+                <Button.Content hidden>
+                  <Icon name="angle double right" />
+                </Button.Content>
               </Button>
             </Link>
           </Card.Content>

@@ -1,18 +1,53 @@
 .App {
   text-align: center;
-  background-color: #cad0d3;
+  background-color: #fffcfc;
   width: auto;
 }
-
-
 
 .ui.main.container {
   margin-top: 2em;
   position: relative;
 }
 
+.text-secondary{
+  color: #333333;
+}
+
+/* .tear{
+  width: 170px;
+  height: 25px;
+} */
+
+.erte{
+  
+  color: #bf00bf;
+  margin-right: 10px;
+  margin-left: 200px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.loog{
+  margin-right: 180px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.telk{
+border-width: 1px;
+margin-bottom: 25px;
+margin-top: 15px;
+height: 100px;;
+}
+
+.orte{
+  margin-right: 110px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .last{
-  margin-left: 2rem;
+  margin-left: 200px;
 }
 
 .erak{
@@ -29,9 +64,18 @@
   margin-top: 1rem;
 }
 
-.navi {
-  background-color: #333c8e !important;
+.sear{
+  margin-right: 15px;
+  color: #333333;
+  margin-left: 15px;
 }
+
+.navi {
+  background-color: #fffcfc !important;
+  
+}
+
+
 
 .aer{
   color: #f29382;
@@ -39,11 +83,6 @@
 .ulti{
   color: #d7eddc;
 }
-
-/* .text{
-  font-style: italic;
-  font-size: larger;
-} */
 
 .ds{
   display: inline-block;

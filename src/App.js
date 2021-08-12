@@ -6,13 +6,15 @@ import Menu from "./layouts/Menu";
 import Navi from "./layouts/Navi";
 import Footer from "./layouts/Footer";
 import Distance from "./layouts/Distance";
+import Board from "./layouts/Board";
 
 
 function App() {
   return (
     <div className="App">
       <Navi />
-      <Menu />
+      <Board/>
+      {/* <Menu /> */}
       <Container className="main">
         <Dashboard />
       </Container>

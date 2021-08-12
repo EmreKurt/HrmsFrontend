@@ -7,15 +7,15 @@ import {
   Image,
   Menu,
   Icon,
+  Divider,
+  Grid,
 } from "semantic-ui-react";
 import SignedIn from "./SignedIn";
 import SignedOut from "./SignedOut";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-
 export default function Navi() {
-  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const history = useHistory();
 
@@ -28,32 +28,28 @@ export default function Navi() {
     setIsAuthenticated(true);
   }
 
-  const {authItem} = useSelector(state => state.auth)
-
+  const { authItem } = useSelector((state) => state.auth);
   return (
-    <div>
-      <Menu size="huge" inverted className="navi">
-        <Container>
-          <Menu.Item className="text">
-           
-          <Link to={`/`} >
-            {/* <Icon  name="braille"/><b>   </b>
-              <b className="aer">H</b> <b className="aer">R</b> <b className="aer">M</b> <b className="aer">S</b> */}
+    <Menu size="huge" className="navi">
+      <Menu.Item onClick>
+        <Link to={`/`}>
+          <span className="erte">HRMS Project</span>
+        </Link>
+      </Menu.Item>
 
-              HRMS <span className='text-secondary'>Project</span>
-            </Link>
-            
-            
-          </Menu.Item>
+      <Menu.Item onClick>
+        <Link to={`/advertisements`}>
+          <span className="sear">İlan ara</span>
+        </Link>
+      </Menu.Item>
 
-          <Menu.Menu position="right">
-            
-            {authItem[0].loggedIn?<SignedIn/>:<SignedOut/>}
+      
 
-            
-          </Menu.Menu>
-        </Container>
-      </Menu>
-    </div>
+      <Menu.Menu position="right">
+        <span className="loog">
+          {authItem[0].loggedIn ? <SignedIn /> : <SignedOut />}
+        </span>
+      </Menu.Menu>
+    </Menu>
   );
 }
