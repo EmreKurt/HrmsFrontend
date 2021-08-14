@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { Card, Table, Button, Form, Grid } from "semantic-ui-react";
 import CvService from "../../services/cvService";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function UpdateSchools({ cvId, updateCvValues }) {
   let { id } = useParams();
@@ -161,8 +162,10 @@ export default function UpdateSchools({ cvId, updateCvValues }) {
                   />
                 </Grid.Column>
               </Grid>
-              <div style={{marginTop:"1em"}}>
-                  <Button fluid color="green" type="submit">Ekle</Button>
+              <div style={{ marginTop: "1em" }}>
+                <Button fluid color="green" type="submit">
+                  Ekle
+                </Button>
               </div>
             </Form>
           </Card.Content>

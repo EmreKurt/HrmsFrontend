@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import {
   Card,
@@ -39,6 +39,7 @@ import JobExpItem from "../../layouts/JobExpItem";
 import TalentItem from "../../layouts/TalentItem";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import swal from "sweetalert";
 
 export default function CvDetail() {
   const { authItem } = useSelector((state) => state.auth);

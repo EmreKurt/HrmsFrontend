@@ -19,6 +19,7 @@ import JobAdFavorites from "../pages/Job/JobAdFavorites";
 import Employer from "../pages/Employer/Employer";
 import EmployerDetail from "../pages/Employer/EmployerDetail";
 import EmployerUpdate from "../pages/Employer/EmployerUpdate";
+import EmployerUpdateConfirm from "../pages/Employer/EmployerUpdateConfirm";
 
 export default function Dashboard() {
 
@@ -45,6 +46,7 @@ export default function Dashboard() {
             <Route exact path ="/employers/:id" component={EmployerDetail}/>
             <Route exact path ="/employer" component={Employer}/>
             <Route  exact path="/employer/:id" component={EmployerUpdate}/>
+            <Route  exact path="/employerUpdateConfirm" component={EmployerUpdateConfirm}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

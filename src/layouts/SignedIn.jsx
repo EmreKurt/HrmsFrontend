@@ -83,6 +83,15 @@ export default function SignedIn() {
                 icon="tags"
               />
             )}
+
+            {authItem[0].user.userType === 3 && (
+              <Dropdown.Item
+                as={NavLink}
+                to="/employerUpdateConfirm"
+                text="Şirket Bilgilerini Onayla"
+                icon="tags"
+              />
+            )}
             <Dropdown.Item
               onClick={() => handleLogout(authItem[0].user)}
               text="Çıkış Yap"

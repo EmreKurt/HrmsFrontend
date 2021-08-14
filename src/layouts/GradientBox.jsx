@@ -4,7 +4,7 @@ function GradientBox({children}) {
     return (
         <div className="gradientbox" style={{
             height:360,
-            color:"white"
+            color:"white",
         }}>
             {children}
         </div>

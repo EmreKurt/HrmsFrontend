@@ -43,7 +43,12 @@ export default function Navi() {
         </Link>
       </Menu.Item>
 
-      
+      {authItem[0].user.userType===2 && 
+       <Menu.Item onClick>
+        <Link to={`/addJobAdvertisement`}>
+          <span class="sear">İlan Ekle</span>
+        </Link>
+      </Menu.Item> }
 
       <Menu.Menu position="right">
         <span className="loog">

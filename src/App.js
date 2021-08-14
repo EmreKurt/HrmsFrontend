@@ -8,17 +8,16 @@ import Footer from "./layouts/Footer";
 import Distance from "./layouts/Distance";
 import Board from "./layouts/Board";
 
-
 function App() {
   return (
     <div className="App">
       <Navi />
-      <Board/>
+      <Board />
       {/* <Menu /> */}
       <Container className="main">
         <Dashboard />
       </Container>
-      <Distance/>
+      <Distance />
       <Grid>
         <Grid.Row></Grid.Row>
         <Grid.Row></Grid.Row>
@@ -26,7 +25,9 @@ function App() {
         <Grid.Row></Grid.Row>
         <Grid.Row></Grid.Row>
       </Grid>
-      <Footer />
+      <div style={{paddingTop:400}}>
+        <Footer />
+      </div>
     </div>
   );
 }

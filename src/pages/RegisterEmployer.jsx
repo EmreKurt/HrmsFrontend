@@ -28,13 +28,7 @@ export default function RegisterEmployer() {
       .length(10, "Telefon numarası hatalı,lütfen 0 olmadan yazınız!")
       .matches(/^[0-9]+$/, "Lütfen sadece rakam giriniz!"),
     webSite: Yup.string()
-      .required("Bu alan zorunludur!")
-      .test("Http olmadan yazınız!", function () {
-        let site = this.parent["webSite"];
-        if (site) {
-          return site.startsWith("http") ? false : true;
-        }
-      }),
+      .required("Bu alan zorunludur!"),
     email: Yup.string()
       .required("Bu alan zorunludur!")
       .email("Lütfen geçerli bir email adresi giriniz!"),
