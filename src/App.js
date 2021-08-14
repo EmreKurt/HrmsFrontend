@@ -18,14 +18,8 @@ function App() {
         <Dashboard />
       </Container>
       <Distance />
-      <Grid>
-        <Grid.Row></Grid.Row>
-        <Grid.Row></Grid.Row>
-        <Grid.Row></Grid.Row>
-        <Grid.Row></Grid.Row>
-        <Grid.Row></Grid.Row>
-      </Grid>
-      <div style={{paddingTop:400}}>
+      
+      <div style={{paddingTop:500}}>
         <Footer />
       </div>
     </div>
