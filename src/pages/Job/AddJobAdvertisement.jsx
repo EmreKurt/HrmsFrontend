@@ -10,6 +10,7 @@ import {
   Card,
   Form,
   Grid,
+  Icon,
 } from "semantic-ui-react";
 import AdvertisementService from "../../services/advertisementService";
 import WorkTypeService from "../../services/workTypeService";
@@ -20,8 +21,11 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import WorkTimeService from "../../services/workTimeService";
 import swal from "sweetalert";
+import UpdateImage from "../CvUpdate/UpdateImage";
 
 export default function AddJobAdvertisement() {
+
+  
   const { authItem } = useSelector((state) => state.auth);
 
   let jobAdService = new AdvertisementService();
@@ -70,7 +74,7 @@ export default function AddJobAdvertisement() {
             text: "Sistem yöneticisi tarafından ilanınızın onaylanmasını bekleyiniz!",
             icon: "success",
             button: "Ok",
-           })//.then(function () {
+          }); //.then(function () {
           //   window.location.reload();
           // });
         } else {
@@ -161,7 +165,15 @@ export default function AddJobAdvertisement() {
             <Form onSubmit={formik.handleSubmit}>
               <div style={{ marginTop: "1em" }}>
                 <Form.Field style={{ marginBottom: "1rem" }}>
-                  <label  style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>İş Pozisyonu</label>
+                  <label
+                    style={
+                      ({ fontWeight: "bold" },
+                      { fontSize: "1em" },
+                      { fontFamily: "cursive" })
+                    }
+                  >
+                    İş Pozisyonu
+                  </label>
                   <Dropdown
                     clearable
                     item
@@ -186,7 +198,15 @@ export default function AddJobAdvertisement() {
 
               <div style={{ marginTop: "2em" }}>
                 <Form.Field>
-                  <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>Şehir</label>
+                  <label
+                    style={
+                      ({ fontWeight: "bold" },
+                      { fontSize: "1em" },
+                      { fontFamily: "cursive" })
+                    }
+                  >
+                    Şehir
+                  </label>
                   <Dropdown
                     clearable
                     item
@@ -211,7 +231,15 @@ export default function AddJobAdvertisement() {
 
               <div style={{ marginTop: "2em" }}>
                 <Form.Field>
-                  <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>Çalışma yeri</label>
+                  <label
+                    style={
+                      ({ fontWeight: "bold" },
+                      { fontSize: "1em" },
+                      { fontFamily: "cursive" })
+                    }
+                  >
+                    Çalışma yeri
+                  </label>
                   <Dropdown
                     clearable
                     item
@@ -236,26 +264,66 @@ export default function AddJobAdvertisement() {
 
               <div style={{ marginTop: "2em" }}>
                 <Form.Field>
-                  <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>Çalışma Süresi</label>
-                  <Dropdown
-                    clearable
-                    item
-                    placeholder="Çalışma Süresi"
-                    search
-                    selection
-                    onChange={(event, data) =>
-                      handleChangeSemantic(data.value, "workTimeId")
-                    }
-                    onBlur={formik.onBlur}
-                    id="workTimeId"
-                    value={formik.values.workTimeId}
-                    options={workTimeOption}
-                  />
-                  {formik.errors.workTimeId && formik.touched.workTimeId && (
-                    <div className={"ui pointing red basic label"}>
-                      {formik.errors.workTimeId}
-                    </div>
-                  )}
+                  <Grid stackable>
+                    <Grid.Column width={16}>
+                      <label
+                        style={
+                          ({ fontWeight: "bold" },
+                          { fontSize: "1em" },
+                          { fontFamily: "cursive" })
+                        }
+                      >
+                        Çalışma Süresi
+                      </label>
+                      <div></div>
+                      <Dropdown
+                        fluid
+                        clearable
+                        item
+                        placeholder="Çalışma Süresi"
+                        search
+                        selection
+                        onChange={(event, data) =>
+                          handleChangeSemantic(data.value, "workTimeId")
+                        }
+                        onBlur={formik.onBlur}
+                        id="workTimeId"
+                        value={formik.values.workTimeId}
+                        options={workTimeOption}
+                      />
+                      {formik.errors.workTimeId &&
+                        formik.touched.workTimeId && (
+                          <div className={"ui pointing red basic label"}>
+                            {formik.errors.workTimeId}
+                          </div>
+                        )}
+                    </Grid.Column>{" "}
+                    {/* <Grid.Column width={8}>
+                      <label
+                        style={
+                          ({ fontWeight: "bold" },
+                          { fontSize: "1em" },
+                          { fontFamily: "cursive" })
+                        }
+                      >
+                        Firma Resmi
+                      </label>
+                      <Input
+                        style={{ width: "100%" }}
+                        placeholder="Firma resimi"
+                        value={formik.values.maxSalary}
+                        name="maxSalary"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        icon="add"
+                      ></Input>
+                      {formik.errors.maxSalary && formik.touched.maxSalary && (
+                        <div className={"ui pointing red basic label"}>
+                          {formik.errors.maxSalary}
+                        </div>
+                      )}
+                    </Grid.Column> */}
+                  </Grid>
                 </Form.Field>
               </div>
 
@@ -263,7 +331,13 @@ export default function AddJobAdvertisement() {
                 <Form.Field>
                   <Grid stackable>
                     <Grid.Column width={8}>
-                      <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>
+                      <label
+                        style={
+                          ({ fontWeight: "bold" },
+                          { fontSize: "1em" },
+                          { fontFamily: "cursive" })
+                        }
+                      >
                         Maaş aralığı minimum
                       </label>
                       <Input
@@ -282,7 +356,13 @@ export default function AddJobAdvertisement() {
                       )}
                     </Grid.Column>
                     <Grid.Column width={8}>
-                      <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>
+                      <label
+                        style={
+                          ({ fontWeight: "bold" },
+                          { fontSize: "1em" },
+                          { fontFamily: "cursive" })
+                        }
+                      >
                         Maaş aralığı maksimum
                       </label>
                       <Input
@@ -308,7 +388,13 @@ export default function AddJobAdvertisement() {
                 <Form.Field>
                   <Grid stackable>
                     <Grid.Column width={8}>
-                      <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>
+                      <label
+                        style={
+                          ({ fontWeight: "bold" },
+                          { fontSize: "1em" },
+                          { fontFamily: "cursive" })
+                        }
+                      >
                         Açık pozisyon sayısı
                       </label>
                       <Input
@@ -330,7 +416,13 @@ export default function AddJobAdvertisement() {
                         )}
                     </Grid.Column>
                     <Grid.Column width={8}>
-                      <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>
+                      <label
+                        style={
+                          ({ fontWeight: "bold" },
+                          { fontSize: "1em" },
+                          { fontFamily: "cursive" })
+                        }
+                      >
                         Son başvuru tarihi
                       </label>
                       <Input
@@ -361,7 +453,15 @@ export default function AddJobAdvertisement() {
 
               <div style={{ marginTop: "2em" }}>
                 <Form.Field>
-                  <label style={{ fontWeight: "bold" },{fontSize:"1em"},{fontFamily:"cursive"}}>Açıklama</label>
+                  <label
+                    style={
+                      ({ fontWeight: "bold" },
+                      { fontSize: "1em" },
+                      { fontFamily: "cursive" })
+                    }
+                  >
+                    Açıklama
+                  </label>
                   <TextArea
                     placeholder="Açıklama"
                     style={{ minHeight: 100 }}

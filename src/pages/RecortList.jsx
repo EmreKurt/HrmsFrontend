@@ -66,7 +66,7 @@ export default function RecortList() {
 
   return (
     <div>
-      <Form size="large" onSubmit={formik.handleSubmit}>
+      <Form style={{paddingBottom:25}} size="large" onSubmit={formik.handleSubmit}>
         <Segment stacked>
         <Grid>
             <Grid.Row></Grid.Row>
@@ -260,11 +260,12 @@ export default function RecortList() {
           </div>
         </Segment>
       </Form>
-      <Message info>
+      <Message  info>
         <Link to={"/registerEmployer"}>
           <b>İşveren olarak kaydolmak için buraya tıkla</b>
         </Link>
       </Message>
     </div>
+    
   );
 }

@@ -13,6 +13,14 @@
   color: #333333;
 }
 
+.turt{
+  
+  background-image: url("https://cdn-res.keymedia.com/cms/images/us/036/0248_637224539076143454.jpg");
+  height: 130vh;
+  background-size: cover;
+  background-repeat:no-repeat;
+}
+
 /* .tear{
   width: 170px;
   height: 25px;
@@ -42,8 +50,8 @@ height: 100px;;
 
 .orte{
   margin-right: 110px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  padding-bottom: 15px;
 }
 
 .last{
@@ -120,7 +128,7 @@ height: 100px;;
   
 }
 
-.footer{
+/* .footer{
   
   width: 100%;
 
@@ -132,7 +140,7 @@ height: 100px;;
   padding: 10rem;
   background-color: rgb(40, 42, 44);
   color: rgb(255, 255, 255);
-}
+} */
 
 .ar{
   margin-top: 150px;

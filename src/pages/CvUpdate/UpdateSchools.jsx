@@ -3,24 +3,19 @@ import SchoolService from "../../services/schoolService";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import { Card, Table, Button, Form, Grid } from "semantic-ui-react";
+import { Card, Table, Button, Form, Grid, Icon } from "semantic-ui-react";
 import CvService from "../../services/cvService";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
+import { useSelector } from "react-redux";
 
 export default function UpdateSchools({ cvId, updateCvValues }) {
   let { id } = useParams();
-  let [cv, setCv] = useState([]);
+  const { authItem } = useSelector((state) => state.auth);
+  let [school, setSchools] = useState([]);
   let schoolService = new SchoolService();
-  let cvService = new CvService();
-  useEffect(() => {
-    let cvService = new CvService();
-    cvService.getBySchoolId(id).then((result) => {
-      setCv(result.data.data);
-    });
-  }, [id]);
 
-  let schoolAddSchema = Yup.object().shape({
+  const schoolAddSchema = Yup.object().shape({
     departmentName: Yup.string()
       .required("Bu alan zorunlu!")
       .min(3, "Minimum 3 karakter uzunluğunda olmalıdır."),
@@ -31,7 +26,16 @@ export default function UpdateSchools({ cvId, updateCvValues }) {
     startYear: Yup.date().required("Bu alan zorunlu!"),
   });
 
-  const formik = useFormik({
+  let formik;
+
+  useEffect(() => {
+    let schoolService = new SchoolService();
+    schoolService.getByCvId(id).then((result) => {
+      setSchools(result.data.data);
+    });
+  }, [id]);
+
+  formik = useFormik({
     initialValues: {
       departmentName: "",
       graduationYear: "",
@@ -40,22 +44,29 @@ export default function UpdateSchools({ cvId, updateCvValues }) {
     },
     validationSchema: schoolAddSchema,
     onSubmit: (values) => {
-      values.cvId = cvId;
+      values.cvId=id;
       schoolService
-        .addScholl(values)
+        .updateSchool(id,values.departmentName,values.graduationYear,values.schoolName,values.startYear)
         .then((result) => {
-          toast.success(result.data.message);
-          schoolService.getByCvId(cvId).then((result) => {
-            setCv(result.data.data);
-          });
-          updateCvValues();
+          if (result.data.success === true) {
+            swal({
+              title: "Başarılı!",
+              text: "Bilgileriniz başarılı bir şekilde güncellenmiştir!",
+              icon: "success",
+              button: "Ok",
+             })
+          } else {
+            swal({
+              title: "İşlem Başarısız!",
+              //text: result.data.message,
+              icon: "error",
+              button: "Ok",
+            });
+          }
         })
-        .catch((result) => {
-          toast.error(result.response.data.message);
-        });
     },
   });
-
+  /*
   const handleDeleteScholl = (schoolId) => {
     cvService
       .deleteSchool(schoolId)
@@ -69,102 +80,102 @@ export default function UpdateSchools({ cvId, updateCvValues }) {
       .catch((result) => {
         toast.error(result.response.data.message);
       });
-  };
-  return (
-    <div>
-      <Card fluid color={"black"}>
-        <Card.Content header="Okudugu Okullar" />
-        <Table celled color={"black"}>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Okul Adı</Table.HeaderCell>
-              <Table.HeaderCell>Bölüm</Table.HeaderCell>
-              <Table.HeaderCell>Başlangıç Tarihi</Table.HeaderCell>
-              <Table.HeaderCell>Mezuniyet Tarihi</Table.HeaderCell>
-              <Table.HeaderCell>Sil</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
+  };*/
 
-          <Table.Body>
-            {cv?.map((cvs) => (
-              <Table.Row key={cvs.school?.id}>
-                <Table.Cell>{cvs.school?.schoolName}</Table.Cell>
-                <Table.Cell>{cvs.school?.departmentName}</Table.Cell>
-                <Table.Cell>{cvs.school?.startYear}</Table.Cell>
-                <Table.Cell>{cvs.school?.graduationYear}</Table.Cell>
-                <Table.Cell>
-                  <Button
-                    color="red"
-                    icon="x"
-                    circular
-                    onClick={() => handleDeleteScholl(cv.school?.id)}
-                  ></Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-      </Card>
+  return (
+    <div style={{ paddingTop: 50 }}>
       <Card fluid>
         <Card fluid color={"black"}>
-          <Card.Content header="Okul Ekle" />
+          <Card.Content header="Okul Bilgilerini Düzenle" />
           <Card.Content>
             <Form onSubmit={formik.handleSubmit}>
               <Grid stackable>
                 <Grid.Column width={8}>
-                  <label>
-                    <b>Okul Adı</b>
-                  </label>
-                  <Form.Input
-                    fluid
-                    placeholder="Okul Adı"
-                    type="text"
-                    name="schoolName"
-                    value={formik.values.schoolName}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  <label>
-                    <b>Başlangıç Tarihi</b>
-                  </label>
-                  <Form.Input
-                    fluid
-                    type="date"
-                    name="startYear"
-                    value={formik.values.startYear}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
+                  <div style={{ paddingTop: 25 }}>
+                    <label>
+                      <b>Okul Adı</b>
+                    </label>
+                  </div>
+                    <Form.Input
+                      fluid
+                      placeholder="Okul Adı"
+                      type="text"
+                      name="schoolName"
+                      value={formik.values.schoolName}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                  <div style={{ paddingTop: 25 }}>
+                    <label>
+                      <b>Başlangıç Tarihi</b>
+                    </label>
+                  </div>
+                    <Form.Input
+                      fluid
+                      type="date"
+                      name="startYear"
+                      value={formik.values.startYear}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
                 </Grid.Column>
                 <Grid.Column width={8}>
-                  <label>
-                    <b>Bölüm Adı</b>
-                  </label>
-                  <Form.Input
-                    fluid
-                    placeholder="Bölüm Adı"
-                    type="text"
-                    name="departmentName"
-                    value={formik.values.departmentName}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  <label>
-                    <b>Mezuniyet Tarihi</b>
-                  </label>
-                  <Form.Input
-                    fluid
-                    type="date"
-                    name="graduationYear"
-                    value={formik.values.graduationYear}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
+                  <div style={{ paddingTop: 25 }}>
+                    <label>
+                      <b>Bölüm Adı</b>
+                    </label>
+                  </div>
+                    <Form.Input
+                      fluid
+                      placeholder="Bölüm Adı"
+                      type="text"
+                      name="departmentName"
+                      value={formik.values.departmentName}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                  <div style={{ paddingTop: 25 }}>
+                    <label>
+                      <b>Mezuniyet Tarihi</b>
+                    </label>
+                  </div>
+                    <Form.Input
+                      fluid
+                      type="date"
+                      name="graduationYear"
+                      value={formik.values.graduationYear}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
                 </Grid.Column>
               </Grid>
-              <div style={{ marginTop: "1em" }}>
-                <Button fluid color="green" type="submit">
-                  Ekle
+              <div style={{ paddingTop: 50, paddingLeft: 600 }}>
+                <Button
+                  animated
+                  style={{
+                    width: "35%",
+                    marginRight: 100,
+                    backgroundColor: "#7fff00",
+                    color: "white",
+                    borderRadius: "14px",
+                    border: "2px teal",
+                    padding: "12px 15px",
+                  }}
+                >
+                  <Button.Content visible>
+                    <div
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: 16,
+                        fontFamily: "monospace",
+                      }}
+                    >
+                      Güncelle
+                    </div>
+                  </Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="check" />
+                  </Button.Content>
                 </Button>
               </div>
             </Form>

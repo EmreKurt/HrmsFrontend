@@ -85,11 +85,13 @@ export default function JobAdFilter({ clickEvent }) {
     <div>
       <Card itemsPerRow={2}>
         <Segment>
+          <div style={{paddingTop:20}}>
           <Segment color="black" raised>
             <Label attached="top" size="large">
               Şehir
             </Label>
             <Dropdown
+            fluid
               placeholder="Şehir seçiniz"
               selection
               search
@@ -102,6 +104,8 @@ export default function JobAdFilter({ clickEvent }) {
               value={cityIndex}
             />
           </Segment>
+          </div>
+          <div style={{paddingTop:30}}>
           <Segment color="black" raised>
             <Label attached="top" size="large">
               İş Pozisyonu
@@ -118,6 +122,8 @@ export default function JobAdFilter({ clickEvent }) {
               </div>
             ))}
           </Segment>
+          </div>
+          <div style={{paddingTop:30}}>
           <Segment color="black" raised>
             <Label attached="top" size="large">
               Çalışma Yeri
@@ -133,6 +139,8 @@ export default function JobAdFilter({ clickEvent }) {
               </div>
             ))}
           </Segment>
+          </div>
+          <div style={{paddingTop:30}}>
           <Segment color="black" raised>
             <Label attached="top" size="large">
               Çalışma Süresi
@@ -146,6 +154,8 @@ export default function JobAdFilter({ clickEvent }) {
               />
             ))}
           </Segment>
+          </div>
+          <div style={{paddingTop:30}}>
           <Button
             type="button"
             fluid
@@ -161,6 +171,7 @@ export default function JobAdFilter({ clickEvent }) {
           >
             Filtrele
           </Button>
+          </div>
         </Segment>
       </Card>
     </div>

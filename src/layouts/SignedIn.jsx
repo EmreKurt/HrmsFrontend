@@ -25,40 +25,48 @@ export default function SignedIn() {
 
   useEffect(() => {
     let cvService = new CvService();
-    cvService.getBySeekerId(id).then((result) => setCv(result.data.data));
-  }, [id]);
-
-  useEffect(() => {
-    let cvService = new CvService();
-    cvService.getByImageId(id).then((result) => setCv(result.data.data));
+    cvService
+      .getBySeekerId(authItem[0].user.id)
+      .then((result) => setCv(result.data.data));
   }, [id]);
 
   return (
     <div className="orte">
-      <Menu.Menu>
-        {/* {authItem[0].user.userType === 2 && (
-          <Link to={`/addJobAdvertisement`}>
-            <Button color="google plus" type="submit">
-              İlan Ekle
-            </Button>
-          </Link>
-        )} */}
-        <Grid>
-          <Grid.Column></Grid.Column>
-          <Grid.Column></Grid.Column>
-        </Grid>
-        <Image
-          avatar="28crop1"
-          src="https://s.gravatar.com/avatar/7d56696691f1892dd786a3ecd371932a?d=mm&s=70"
-        />
-        <Dropdown pointing="top right" text={authItem[0].user.name}>
+      <Grid>
+        {authItem[0].user.userType === 1 && (
+          <div>
+            {cv.image?.map((images) => (
+              <img
+                width="30"
+                height="30"
+                size="tiny"
+                src={images?.imageUrl}
+                key={images?.id}
+                style={{ borderRadius: "50%" }}
+              />
+            ))}
+          </div>
+        )}
+        <Dropdown
+          style={{ paddingLeft: 1, paddingTop: 5 }}
+          pointing="top right"
+          text={authItem[0].user.name}
+        >
           <Dropdown.Menu>
-            {authItem[0].user.userType === 1 && (
+            {authItem[0].user.userType === 1 && //cv.active === true && 
+            (
+              cv.active ? 
               <Dropdown.Item as={Link} to={`/cv/${authItem[0].user.id}`}>
                 <Icon name="cloud upload" />
-                Cv'ni güncelle
+                Cv'im
+              </Dropdown.Item>
+              :
+              <Dropdown.Item as={Link} to={`/cvs/${authItem[0].user.id}`}>
+                <Icon name="cloud upload" />
+                Cv ekle
               </Dropdown.Item>
             )}
+
             {authItem[0].user.userType === 1 && (
               <Dropdown.Item
                 as={NavLink}
@@ -99,7 +107,7 @@ export default function SignedIn() {
             />
           </Dropdown.Menu>
         </Dropdown>
-      </Menu.Menu>
+      </Grid>
     </div>
   );
 }

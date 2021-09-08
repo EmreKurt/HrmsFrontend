@@ -19,7 +19,7 @@ function App() {
       </Container>
       <Distance />
       
-      <div style={{paddingTop:500}}>
+      <div style={{paddingTop:200}}>
         <Footer />
       </div>
     </div>

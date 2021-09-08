@@ -40,13 +40,18 @@ import TalentItem from "../../layouts/TalentItem";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import swal from "sweetalert";
+import UpdateImage from "../CvUpdate/UpdateImage";
+import ProgramLanguageService from "../../services/programLanguageService";
+import { toast } from "react-toastify";
 
 export default function CvDetail() {
   const { authItem } = useSelector((state) => state.auth);
   let { id } = useParams();
 
   let cvService = new CvService();
+  let programLanguageService = new ProgramLanguageService();
   const [cv, setCv] = useState([]);
+  const [programLanguage, setProgramLanguage] = useState([]);
 
   useEffect(() => {
     let cvService = new CvService();
@@ -57,6 +62,28 @@ export default function CvDetail() {
     cvService.getBySeekerId(id).then((result) => {
       setCv(result.data.data);
     });
+  };
+
+  const handleRemoveFavorite = (technologyId) => {
+    programLanguageService
+      .deleteProgramLanguage(technologyId)
+      .then((result) => {
+        setProgramLanguage(
+          programLanguage.filter((languageAd) => languageAd.id !== technologyId)
+        );
+        if (result.data.success === true) {
+          swal({
+            title: "Başarılı!",
+            text: result.data.message,
+            icon: "success",
+            button: "Ok",
+          });
+        }
+        //toast.info(result.data.message);
+      });
+    // .catch((result) => {
+    //   toast.error(result.response.data.message);
+    // });
   };
 
   return (
@@ -80,7 +107,7 @@ export default function CvDetail() {
             <div className="d-flex">
               <div
                 className="col-2 bg-white min-vh-100"
-                style={{ paddingTop: 60, paddingLeft: 20, paddingRight: 90 }}
+                style={{ paddingTop: 40, paddingLeft: 20, paddingRight: 90 }}
               >
                 <div className="d-flex flex-column">
                   <span
@@ -149,7 +176,7 @@ export default function CvDetail() {
                         fontSize: 17,
                       }}
                     >
-                      <h2>25.06.2021</h2>
+                      <h2>{cv.updateDate}</h2>
                       <small>Son Güncelleme</small>
                     </div>
                   </div>
@@ -166,37 +193,59 @@ export default function CvDetail() {
                       <Card fluid>
                         <Card.Content>
                           <Grid divided="vertically">
-                            <Grid.Row columns={1}>
-                              <Grid.Column>
-                                <div>
-                                  <div>
-                                    <Card.Header
-                                      style={{
-                                        fontFamily: "cursive",
-                                        fontSize: 17,
-                                        paddingRight: 1070,
-                                      }}
-                                    >
-                                      <Card.Header>
-                                        İletişim Bilgileri
-                                      </Card.Header>
-                                    </Card.Header>
-                                  </div>
-                                </div>
-                              </Grid.Column>
+                            <Grid.Row>
+                              <div
+                                style={{
+                                  fontFamily: "cursive",
+                                  fontSize: 17,
+                                  //paddingRight: 1050,
+                                  paddingLeft: 28,
+                                  paddingTop: 5,
+                                }}
+                              >
+                                <span>İletişim Bilgileri</span>
+                              </div>
+                              <div style={{ paddingLeft: 957, paddingTop: 1 }}>
+                                <Link to={`/cvsContentİnformation/${id}`}>
+                                  <Button
+                                    icon="edit"
+                                    content="Düzenle"
+                                    color="red"
+                                    inverted
+                                  />
+                                </Link>
+                              </div>
                             </Grid.Row>
 
                             <Grid.Row>
                               <div>
-                                <div style={{ paddingLeft: 25 }}>
+                                <div
+                                  style={{ paddingLeft: 25, paddingBottom: 20 }}
+                                >
                                   <div className="telk">
-                                    <Image
-                                      circular
-                                      floated="left"
-                                      size="small"
-                                      src={cv.image?.imageUrl}
-                                      key={cv.image?.id}
+                                    {cv.image?.map((images) => (
+                                      <Image
+                                        floated="left"
+                                        size="tiny"
+                                        src={images?.imageUrl}
+                                        circular="0.1em"
+                                        key={images?.id}
+                                      />
+                                    ))}
+                                    <UpdateImage
+                                      cvId={cv.id}
+                                      updateCvValues={updateCvValues}
                                     />
+                                    {/* <Popup onClose
+                                        trigger={
+                                          <button className="ui button">
+                                            Resim Yükle
+                                          </button>
+                                        }
+                                        modal
+                                      > */}
+
+                                    {/* </Popup> */}
                                   </div>
                                 </div>
                               </div>
@@ -287,7 +336,7 @@ export default function CvDetail() {
                                   <div style={{ paddingTop: 10 }}>
                                     <Card.Description>
                                       <a
-                                        href={cv.githubAdress}
+                                        href={cv?.githubAdress}
                                         target={"_blank"}
                                         rel="noopener noreferrer"
                                       >
@@ -299,7 +348,7 @@ export default function CvDetail() {
                                       </a>
 
                                       <a
-                                        href={cv.linkedinAdress}
+                                        href={cv?.linkedinAdress}
                                         target={"_blank"}
                                         rel="noopener noreferrer"
                                       >
@@ -356,7 +405,8 @@ export default function CvDetail() {
                                   <Button
                                     icon="edit"
                                     content="Düzenle"
-                                    color="google plus"
+                                    color="red"
+                                    inverted
                                   />
                                 }
                                 modal
@@ -447,33 +497,37 @@ export default function CvDetail() {
                                 }}
                               >
                                 <Card.Content>Okul Adı</Card.Content>
-                                <div
-                                  style={{
-                                    fontSize: 16,
-                                    font: "menu",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  <Card.Description>
-                                    {cv.school?.schoolName}
-                                  </Card.Description>
-                                </div>
+                                {cv.school?.map((schools) => (
+                                  <div
+                                    style={{
+                                      fontSize: 16,
+                                      font: "menu",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    <Card.Description>
+                                      {schools.schoolName}
+                                    </Card.Description>
+                                  </div>
+                                ))}
                                 <div
                                   style={{ paddingTop: 15, paddingRight: 10 }}
                                 >
                                   <Card.Header>Departman</Card.Header>{" "}
                                 </div>
-                                <div
-                                  style={{
-                                    fontSize: 16,
-                                    font: "menu",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  <Card.Description>
-                                    {cv.school?.departmentName}
-                                  </Card.Description>
-                                </div>
+                                {cv.school?.map((schools) => (
+                                  <div
+                                    style={{
+                                      fontSize: 16,
+                                      font: "menu",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    <Card.Description>
+                                      {schools.departmentName}
+                                    </Card.Description>
+                                  </div>
+                                ))}
                               </div>
                             </Card.Header>
                             <Card.Header
@@ -497,48 +551,51 @@ export default function CvDetail() {
                                 }}
                               >
                                 <Card.Header>Başlangıç Tarihi</Card.Header>
-                                <div
-                                  style={{
-                                    fontSize: 16,
-                                    font: "menu",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  <Card.Content>
-                                    {cv.school?.startYear}
-                                  </Card.Content>
-                                </div>
+                                {cv.school?.map((schools) => (
+                                  <div
+                                    style={{
+                                      fontSize: 16,
+                                      font: "menu",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    <Card.Content>
+                                      {schools.startYear}
+                                    </Card.Content>
+                                  </div>
+                                ))}
                                 <div style={{ paddingTop: 15 }}>
                                   <Card.Header>Mezuniyet Durumu</Card.Header>
                                 </div>
-                                <div
-                                  style={{
-                                    fontSize: 16,
-                                    font: "menu",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  <Card.Content>
-                                    {cv.school?.graduationYear ? (
-                                      cv.school?.graduationYear
-                                    ) : (
-                                      <p>Devam Ediyor</p>
-                                    )}
-                                  </Card.Content>
-                                </div>
+                                {cv.school?.map((schools) => (
+                                  <div
+                                    style={{
+                                      fontSize: 16,
+                                      font: "menu",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    <Card.Content>
+                                      {schools.graduationYear ? (
+                                        schools.graduationYear
+                                      ) : (
+                                        <p>Devam Ediyor</p>
+                                      )}
+                                    </Card.Content>
+                                  </div>
+                                ))}
                               </div>
                             </Card.Header>
                             <div style={{ paddingLeft: 70, paddingTop: 30 }}>
-                              <button
-                                style={{ border: "none", background: "none" }}
-                                onClick
-                              >
-                                <FaEdit
-                                  size={30}
-                                  color={"#840eb6"}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </button>
+                              {cv.school?.map((schools) => (
+                                <Link to={`/cvsSchools/${schools.id}`}>
+                                  <FaEdit
+                                    size={30}
+                                    color={"#840eb6"}
+                                    style={{ cursor: "pointer" }}
+                                  />
+                                </Link>
+                              ))}
                             </div>
                           </Grid.Row>
                         </Grid>
@@ -610,26 +667,30 @@ export default function CvDetail() {
                                     fontWeight: "bold",
                                   }}
                                 >
-                                  <Card.Description>
-                                    {cv.jobExperience?.workPlaceName}
-                                  </Card.Description>
+                                  {cv.jobExperience?.map((experience) => (
+                                    <Card.Description>
+                                      {experience.workPlaceName}
+                                    </Card.Description>
+                                  ))}
                                 </div>
                                 <div
                                   style={{ paddingTop: 15, paddingRight: 10 }}
                                 >
                                   <Card.Header>Departman</Card.Header>{" "}
                                 </div>
-                                <div
-                                  style={{
-                                    fontSize: 16,
-                                    font: "menu",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  <Card.Description>
-                                    {cv.jobExperience?.position}
-                                  </Card.Description>
-                                </div>
+                                {cv.jobExperience?.map((experience) => (
+                                  <div
+                                    style={{
+                                      fontSize: 16,
+                                      font: "menu",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    <Card.Description>
+                                      {experience.position}
+                                    </Card.Description>
+                                  </div>
+                                ))}
                               </div>
                             </Card.Header>
                             <Card.Header
@@ -660,9 +721,11 @@ export default function CvDetail() {
                                     fontWeight: "bold",
                                   }}
                                 >
-                                  <Card.Content>
-                                    {cv.jobExperience?.startYear}
-                                  </Card.Content>
+                                  {cv.jobExperience?.map((experience) => (
+                                    <Card.Content>
+                                      {experience.startYear}
+                                    </Card.Content>
+                                  ))}
                                 </div>
                                 <div style={{ paddingTop: 15 }}>
                                   <Card.Header>İş Durumu</Card.Header>
@@ -674,13 +737,15 @@ export default function CvDetail() {
                                     fontWeight: "bold",
                                   }}
                                 >
-                                  <Card.Content>
-                                    {cv.jobExperience?.leavingWorkYear ? (
-                                      cv.jobExperience?.leavingWorkYear
-                                    ) : (
-                                      <p>Devam Ediyor</p>
-                                    )}
-                                  </Card.Content>
+                                  {cv.jobExperience?.map((experience) => (
+                                    <Card.Content>
+                                      {experience.leavingWorkYear ? (
+                                        experience.leavingWorkYear
+                                      ) : (
+                                        <p>Devam Ediyor</p>
+                                      )}
+                                    </Card.Content>
+                                  ))}
                                 </div>
                               </div>
                             </Card.Header>
@@ -688,18 +753,15 @@ export default function CvDetail() {
                               className="d-flex flex-column"
                               style={{ paddingLeft: 91, paddingTop: 30 }}
                             >
-                              <button
-                                style={{ border: "none", background: "none" }}
-                                onClick
-                              >
-                                <FaEdit
-                                  size={30}
-                                  style={{
-                                    color: "#666666",
-                                    cursor: "pointer",
-                                  }}
-                                />
-                              </button>
+                              {cv.jobExperience?.map((experience) => (
+                                <Link to={`/cvsExperiences/${experience.id}`}>
+                                  <FaEdit
+                                    size={30}
+                                    color={"#666666"}
+                                    style={{ cursor: "pointer" }}
+                                  />
+                                </Link>
+                              ))}
                             </div>
                           </Grid.Row>
                         </Grid>
@@ -735,23 +797,45 @@ export default function CvDetail() {
                               <span>Yetenek</span>
                             </div>
                             <div style={{ paddingLeft: 1025, paddingTop: 3 }}>
-                              <Button
-                                icon="edit"
-                                content="Düzenle"
-                                color="google plus"
-                              />
+                              <Link to={`/cvsProgramLanguages/${id}`}>
+                                <Button
+                                  icon="check"
+                                  content="Ekle"
+                                  color="blue"
+                                  inverted
+                                />
+                              </Link>
                             </div>
                           </Grid.Row>
                           <Grid.Row>
                             {/* <TalentItem/> */}
-                            <div style={{ paddingLeft: 40 }}>
-                              <button
-                                style={{ width: "100%", marginRight: 100,backgroundColor:"#3abc3a",color:"white",borderRadius: "14px",border: "2px teal",padding: "10px 15px" }}
-                                
-                              >
-                                {cv.programLanguage?.programLanguage}
-                              </button>
-                            </div>
+                            {cv.programLanguage?.map((language) => (
+                              <div style={{ paddingLeft: 40 }}>
+                                <Button
+                                  animated
+                                  style={{
+                                    width: "90%",
+                                    marginRight: 80,
+                                    //backgroundColor: "#3abc3a",
+                                    backgroundColor: "#f44e4e",
+                                    color: "white",
+                                    borderRadius: "14px",
+                                    border: "2px teal",
+                                    padding: "10px 15px",
+                                  }}
+                                  onClick={() =>
+                                    handleRemoveFavorite(language.id)
+                                  }
+                                >
+                                  <Button.Content visible>
+                                    {language.programLanguage}
+                                  </Button.Content>
+                                  <Button.Content hidden>
+                                    <Icon name="trash alternate" />
+                                  </Button.Content>
+                                </Button>
+                              </div>
+                            ))}
                           </Grid.Row>
                         </Grid>
                       </Card.Content>
@@ -786,49 +870,74 @@ export default function CvDetail() {
                               <span>Yabancı Dil</span>
                             </div>
                             <div style={{ paddingLeft: 1000, paddingTop: 3 }}>
-                              <Button
-                                icon="edit"
-                                content="Düzenle"
-                                color="google plus"
-                              />
+                              <Link to={`/cvsLanguages/${id}`}>
+                                <Button
+                                  icon="edit"
+                                  content="Düzenle"
+                                  color="red"
+                                  inverted
+                                />
+                              </Link>
                             </div>
                           </Grid.Row>
                           <Grid.Row>
                             <div
                               style={{
-                                paddingTop: 25,
+                                paddingTop: 5,
                                 paddingLeft: 50,
                                 fontSize: 18,
                                 color: "#ff7f00",
                                 fontWeight: "bold",
                               }}
                             >
-                              <Card.Content>Dil</Card.Content>
+                              {cv.language?.map((languages) => (
+                                <Card.Content
+                                  style={{
+                                    paddingTop: 30,
+                                  }}
+                                >
+                                  Dil
+                                </Card.Content>
+                              ))}
                             </div>
                             <div
                               style={{
-                                paddingTop: 25,
+                                paddingTop: 5,
                                 paddingLeft: 40,
-                                fontSize: 15,
+                                fontSize: 17,
                                 fontWeight: "bold",
                               }}
                             >
-                              <Card.Content>
-                                {cv.language?.languageName}
-                              </Card.Content>
+                              {cv.language?.map((languages) => (
+                                <Card.Content
+                                  style={{
+                                    paddingTop: 30,
+                                  }}
+                                >
+                                  {languages.languageName}
+                                </Card.Content>
+                              ))}
                             </div>
-                            <div style={{ paddingLeft: 900, paddingTop: 25 }}>
-                              <Card.Content>Seviye</Card.Content>
+
+                            <div style={{ paddingLeft: 750, paddingTop: 5 }}>
+                              {cv.language?.map((languages) => (
+                                <Card.Content
+                                  style={{ paddingTop: 28, fontSize: 16 }}
+                                >
+                                  Seviye &nbsp; &nbsp; &nbsp;
+                                  <Rating
+                                    icon="star"
+                                    size="huge"
+                                    disabled
+                                    rating={languages.languageLevel}
+                                    maxRating={5}
+                                  />
+                                </Card.Content>
+                              ))}
                             </div>
-                            <div style={{ paddingTop: 25, paddingLeft: 15 }}>
-                              <Rating
-                                icon="star"
-                                size="huge"
-                                disabled
-                                rating={cv.language?.languageLevel}
-                                maxRating={5}
-                              />
-                            </div>
+                            {/* <div style={{ paddingTop: 35, paddingLeft: 20 }}>
+                            
+                            </div> */}
                           </Grid.Row>
                         </Grid>
                       </Card.Content>

@@ -6,6 +6,10 @@ export default class CvService{
         return axios.get("http://localhost:8080/api/cv/getAll")
     }
 
+    addCv(values){
+        return axios.post("http://localhost:8080/api/cv/addCv",values)
+    }
+
     getById(id){
         return axios.get("http://localhost:8080/api/cv/getId?id="+id)
     }    

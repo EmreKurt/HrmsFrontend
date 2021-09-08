@@ -57,26 +57,20 @@ export default function LoginList({ signIn }) {
   });
 
   return (
-    <div>
-      <Grid>
-        <Grid.Row></Grid.Row>
-        <Grid.Row></Grid.Row>
-      </Grid>
-      <Grid>
-        <Grid.Column width={8}>
-          <Segment  placeholder="39d8">
-            <Grid>
-              <Grid.Row></Grid.Row>
-              <Grid.Row></Grid.Row>
-            </Grid>
-
+    <div >
+      <Grid style={{paddingTop:100,paddingLeft:300,paddingRight:300}}>
+        <Grid.Column width={9}>
+          <Segment style={{height:380}} >
             <Image
+            style={{imageRendering:"pixelated",objectFit:"contain",
+            width:"850px",
+            height:"360px"}}
               src="https://www.cutehr.io/wp-content/uploads/2019/04/HRMS-Key-Features.jpg"
-              size="huge"
+              
             />
           </Segment>
         </Grid.Column>
-        <Grid.Column width={8}>
+        <Grid.Column width={7}>
           <Form size="large" onSubmit={formik.handleSubmit}>
             <Segment stacked color="violet">
               <Grid>
@@ -110,11 +104,11 @@ export default function LoginList({ signIn }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.email && formik.touched.email && (
+                {/* {formik.errors.email && formik.touched.email && (
                   <div className={"ui pointing red basic label"}>
                     {formik.errors.email}
                   </div>
-                )}
+                )} */}
               </div>
               <div style={{ marginTop: "2em" }}>
                 <label>
@@ -131,11 +125,11 @@ export default function LoginList({ signIn }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.password && formik.touched.password && (
+                {/* {formik.errors.password && formik.touched.password && (
                   <div className={"ui pointing red basic label"}>
                     {formik.errors.password}
                   </div>
-                )}
+                )} */}
               </div>
               <div style={{ marginTop: "2em" }}>
                 <Button primary fluid size="large" type="submit">
