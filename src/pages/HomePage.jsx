@@ -1,4 +1,4 @@
-import React,{ createRef, useEffect, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Container,
@@ -16,20 +16,18 @@ import {
   Label,
 } from "semantic-ui-react";
 import { withTranslation } from "react-i18next";
-
+import Navi from "../layouts/Navi";
+import Footer from "../layouts/Footer";
 
 class HomePage extends React.Component {
-    
   render() {
-      
     const { t } = this.props;
 
-    
     return (
-      <div style={{ paddingBottom: 300 }}>
-        <Container style={{ marginTop: "13em" }}>
+      <div style={{ paddingTop: 120, backgroundColor: "#2b6df2" }}>
+        <Container>
           <Item.Group>
-            <Item>
+            <Item style={{ paddingBottom: 150 }}>
               <Item.Image
                 size="large"
                 src="https://www.betterbuys.com/wp-content/uploads/2019/08/hrms-hero-intro.png"
@@ -50,29 +48,11 @@ class HomePage extends React.Component {
                     "Vakit kaybetmeyin, Bize katılın ve İş/Şirket Uyumunu bulun!!!"
                   )}
                 </Item.Extra>
-                <Menu.Item>
-                  <Button
-                    size="large"
-                    as={NavLink}
-                    to="/login"
-                    style={{ marginTop: "4em" }}
-                  >
-                    {t("Giriş Yap")}
-                  </Button>
-                  <Button
-                    size="large"
-                    as={NavLink}
-                    to="/recort"
-                    positive
-                    style={{ marginLeft: "0.6em" }}
-                  >
-                    {t("Kayıt Ol")}
-                  </Button>
-                </Menu.Item>
               </Item.Content>
             </Item>
           </Item.Group>
         </Container>
+        <Footer />
       </div>
     );
   }

@@ -66,7 +66,7 @@ export default function RecortList() {
 
   return (
     <div>
-      <Form style={{paddingBottom:25}} size="large" onSubmit={formik.handleSubmit}>
+      <Form style={{paddingBottom:25,paddingTop:100}} size="large" onSubmit={formik.handleSubmit}>
         <Segment stacked>
         <Grid>
             <Grid.Row></Grid.Row>

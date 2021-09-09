@@ -20,8 +20,8 @@ export default function Footer() {
   return (
     <div className="bg">
       <Container textAlign="center">
-        <Grid divided inverted stackable textAlign="center">
-          <MDBCol md="3" lg="4" xl="3" className="mb-4">
+        <Grid >
+          <MDBCol >
             <Grid.Row></Grid.Row>
             <div style={{ paddingTop: 30 ,paddingRight:50}}>
               <h3 className="text-uppercase font-weight-bold">

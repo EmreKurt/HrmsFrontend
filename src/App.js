@@ -11,17 +11,9 @@ import Board from "./layouts/Board";
 function App() {
   return (
     <div className="App">
-      <Navi />
+      {/* <Navi /> */}
       <Board />
-      {/* <Menu /> */}
-      <Container className="main">
-        <Dashboard />
-      </Container>
-      <Distance />
-      
-      <div style={{paddingTop:200}}>
-        <Footer />
-      </div>
+      <Dashboard />
     </div>
   );
 }

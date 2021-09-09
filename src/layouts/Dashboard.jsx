@@ -1,6 +1,6 @@
 import React from "react";
 import Categories from "./Categories";
-import { Grid } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import JobAdvertisementList from "../pages/Job/JobAdvertisementList";
 import CvList from "../pages/CV/CvList";
 import { Route } from "react-router-dom";
@@ -34,13 +34,14 @@ export default function Dashboard() {
 
   return (
     <div>
+      
       <ToastContainer position="bottom-right"/>
       <Grid>
         <Grid.Row>
           <Grid.Column width={16}>
-             <Route exact path="/" component={HomePage}/> 
+             
             
-            
+             <Container>
             <Route exact path="/recort" component={RecortList}/>   
             <Route exact path="/addJobAdvertisement" component={AddJobAdvertisement}/>
             <Route exact path ="/confirmAdvert" component={ConfirmJobAdvertisement}/>  
@@ -60,9 +61,11 @@ export default function Dashboard() {
             <Route exact path="/cvsProgramLanguages/:id" component={UpdateProgramLanguage} />
             <Route exact path="/cvsLanguages/:id" component={UpdateLanguage} />
             <Route exact path="/cvsContentİnformation/:id" component={UpdateContactİnformation} />
+            </Container>
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      
     </div>
   );
 }

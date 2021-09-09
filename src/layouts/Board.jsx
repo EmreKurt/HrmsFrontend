@@ -16,6 +16,7 @@ import JobPostingBiography from "../pages/JobCv/JobPostingBiography";
 import JobPostingContactİnformation from "../pages/JobCv/JobPostingContactİnformation";
 import JobSeekerList from "../pages/JobSeekerList";
 import LoginList from "../pages/LoginList";
+import HomePageWithTranslation from "../pages/HomePage";
 
 export default function Board() {
   return (
@@ -24,6 +25,7 @@ export default function Board() {
       <Grid>
         <Grid.Row>
           <Grid.Column width={16}>
+          <Route exact path="/" component={HomePageWithTranslation}/> 
             <Route exact path="/cv" component={CvList} />
             <Route exact path="/cv/:id" component={CvDetail} />
             <Route exact path="/cvs" component={CvList} />

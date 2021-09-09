@@ -30,7 +30,7 @@ export default function Navi() {
 
   const { authItem } = useSelector((state) => state.auth);
   return (
-    <Menu size="huge" className="navi">
+    <Menu size="massive" className="navi">
       <Menu.Item onClick>
         <Link to={`/`}>
           <span className="erte">HRMS Project</span>

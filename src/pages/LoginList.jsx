@@ -58,11 +58,11 @@ export default function LoginList({ signIn }) {
 
   return (
     <div >
-      <Grid style={{paddingTop:100,paddingLeft:300,paddingRight:300}}>
+      <Grid style={{paddingTop:200,paddingLeft:300,paddingRight:300}}>
         <Grid.Column width={9}>
           <Segment style={{height:380}} >
             <Image
-            style={{imageRendering:"pixelated",objectFit:"contain",
+            style={{imageRendering:"-webkit-optimize-contrast",objectFit:"contain",
             width:"850px",
             height:"360px"}}
               src="https://www.cutehr.io/wp-content/uploads/2019/04/HRMS-Key-Features.jpg"
@@ -89,7 +89,7 @@ export default function LoginList({ signIn }) {
                 <Grid.Row></Grid.Row>
                 <Grid.Row></Grid.Row>
               </Grid>
-              <div>
+              <div style={{paddingLeft:25,paddingRight:25}}>
                 <label>
                   <b>Email</b>
                 </label>
@@ -110,7 +110,7 @@ export default function LoginList({ signIn }) {
                   </div>
                 )} */}
               </div>
-              <div style={{ marginTop: "2em" }}>
+              <div style={{ marginTop: "2em",paddingLeft:25,paddingRight:25 }}>
                 <label>
                   <b>Şifre</b>
                 </label>
@@ -131,7 +131,7 @@ export default function LoginList({ signIn }) {
                   </div>
                 )} */}
               </div>
-              <div style={{ marginTop: "2em" }}>
+              <div style={{ marginTop: "2em",paddingLeft:25,paddingRight:25 }}>
                 <Button primary fluid size="large" type="submit">
                   Giriş Yap
                 </Button>

@@ -2,6 +2,7 @@
   text-align: center;
   background-color: #fffcfc;
   width: auto;
+
 }
 
 .ui.main.container {
@@ -122,8 +123,6 @@ height: 100px;;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity:  80%  ;
-  position: relative;
   position: center;
   
 }
