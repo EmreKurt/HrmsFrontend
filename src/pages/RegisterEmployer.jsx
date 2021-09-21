@@ -39,7 +39,7 @@ export default function RegisterEmployer() {
     rePassword: Yup.string()
       .required("Bu alan zorunludur!")
       .oneOf([Yup.ref("password"), null], "Şifreler uyuşmuyor!"),
-    image: Yup.string().required("Resim zorunludur!"),
+    //image: Yup.string(),
     explanation: Yup.string().required("Firma açıklaması zorunludur!"),
   });
 
@@ -51,7 +51,7 @@ export default function RegisterEmployer() {
       email: "",
       password: "",
       rePassword: "",
-      image: "",
+      //image: "",
       explanation: "",
     },
     validationSchema: employerAddSchema,
@@ -202,7 +202,7 @@ export default function RegisterEmployer() {
                 )}
               </div>
 
-              <div style={{ marginTop: "2em" }}>
+              {/* <div style={{ marginTop: "2em" }}>
                 <label>
                   <b>Firma Resimi</b>
                 </label>
@@ -217,12 +217,8 @@ export default function RegisterEmployer() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.image && formik.touched.image && (
-                  <div className={"ui pointing red basic label"}>
-                    {formik.errors.image}
-                  </div>
-                )}
-              </div>
+               
+              </div> */}
 
               <div style={{ marginTop: "2em" }}>
                 <label>

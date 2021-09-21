@@ -107,7 +107,7 @@ export default function CvDetail() {
             <div className="d-flex">
               <div
                 className="col-2 bg-white min-vh-100"
-                style={{ paddingTop: 40, paddingLeft: 20, paddingRight: 90 }}
+                style={{ paddingTop: 40,  paddingRight: 90 }}
               >
                 <div className="d-flex flex-column">
                   <span
@@ -115,14 +115,15 @@ export default function CvDetail() {
                     style={{
                       fontWeight: "bold",
                       fontSize: 18,
-                      paddingRight: 45,
+                      paddingRight: 52,
+                      paddingLeft: 20,
                     }}
                   >
                     Eklediğim Alanlar
                   </span>
 
                   <div
-                    style={{ fontSize: 17, paddingRight: 44, paddingTop: 10 }}
+                    style={{ fontSize: 17,paddingRight: 42, paddingTop: 10 }}
                   >
                     <CvNavItem
                       text={"Eğitim Bilgileri"}
@@ -143,7 +144,7 @@ export default function CvDetail() {
                   </div>
 
                   <div
-                    style={{ ffontSize: 17, paddingRight: 74, paddingTop: 10 }}
+                    style={{ ffontSize: 17, paddingRight: 78, paddingTop: 10 }}
                   >
                     <CvNavItem text={"İş Deneyimi"} icon={<FaUserTie />} />
                   </div>
@@ -220,32 +221,24 @@ export default function CvDetail() {
                             <Grid.Row>
                               <div>
                                 <div
-                                  style={{ paddingLeft: 25, paddingBottom: 20 }}
+                                  style={{ paddingLeft: 25, paddingBottom: 15 }}
                                 >
                                   <div className="telk">
                                     {cv.image?.map((images) => (
-                                      <Image
-                                        floated="left"
-                                        size="tiny"
-                                        src={images?.imageUrl}
-                                        circular="0.1em"
-                                        key={images?.id}
-                                      />
+                                      <div >
+                                        <Image
+                                          floated="left"
+                                          size="tiny"
+                                          src={images?.imageUrl}
+                                          circular="0.1em"
+                                          key={images?.id}
+                                        />
+                                      </div>
                                     ))}
                                     <UpdateImage
                                       cvId={cv.id}
                                       updateCvValues={updateCvValues}
                                     />
-                                    {/* <Popup onClose
-                                        trigger={
-                                          <button className="ui button">
-                                            Resim Yükle
-                                          </button>
-                                        }
-                                        modal
-                                      > */}
-
-                                    {/* </Popup> */}
                                   </div>
                                 </div>
                               </div>

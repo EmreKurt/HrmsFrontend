@@ -32,7 +32,7 @@ export default function Navi() {
   return (
     <Menu size="massive" className="navi">
       <Menu.Item onClick>
-        <Link to={`/`}>
+        <Link to={`/home`}>
           <span className="erte">HRMS Project</span>
         </Link>
       </Menu.Item>
@@ -50,11 +50,13 @@ export default function Navi() {
         </Link>
       </Menu.Item> }
 
-      <Menu.Menu position="right">
+      <div style={{paddingLeft:900,paddingTop:10}}>
+      <Menu.Menu >
         <span className="loog">
           {authItem[0].loggedIn ? <SignedIn /> : <SignedOut />}
         </span>
       </Menu.Menu>
+      </div>
     </Menu>
   );
 }

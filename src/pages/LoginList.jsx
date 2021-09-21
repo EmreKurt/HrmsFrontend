@@ -48,7 +48,7 @@ export default function LoginList({ signIn }) {
         .login(values)
         .then((result) => {
           handleLogin(result.data.data);
-          history.push("/");
+          history.push("/home");
         })
         .catch((result) => {
           toast.error(result.response.data.message);

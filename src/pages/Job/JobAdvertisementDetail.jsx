@@ -16,6 +16,12 @@ import ShadowBoxWithHeader from "../../layouts/ShadowBoxWithHeader";
 import JobSeekerService from "../../services/jobSeekerService";
 import { useSelector } from "react-redux";
 import swal from "sweetalert";
+import Navi from "../../layouts/Navi";
+import GradientBox from "../../layouts/GradientBox";
+import { FaEllipsisV } from "react-icons/fa";
+import { style } from "dom-helpers";
+import { MdBorderBottom } from "react-icons/md";
+import Employer from "../Employer/Employer";
 
 export default function JobAdvertisementDetail() {
   let { id } = useParams();
@@ -43,6 +49,10 @@ export default function JobAdvertisementDetail() {
     }
   }*/
 
+  function era() {
+    style = { borderBottomStyle: "inset", borderColor: "purple" };
+  }
+
   useEffect(() => {
     let jobSeekers = new JobSeekerService();
     jobSeekers.getJobSeeker().then((result) => setJobSeeker(result.data.data));
@@ -63,295 +73,266 @@ export default function JobAdvertisementDetail() {
   }, [id]);
   return (
     <div>
-      <div style={{ paddingLeft: 190, paddingRight: 290, paddingTop: 50 }}>
-        <Card fluid color={"black"} style={{ borderRadius: "25px" }}>
-          <Card.Content
-            style={{ paddingBottom: 20, paddingTop: 20, paddingRight: 1250 }}
-            header="Firma Açıklaması"
-          />
-          <Card.Content style={{ paddingBottom: 25, paddingTop: 20 }}>
-            {advertisements.employer?.explanation}
-          </Card.Content>
-        </Card>
-      </div>
-
-      <div style={{ paddingLeft: 200 }}>
-        <Card.Group style={{ paddingTop: 50 }} itemsPerRow={2}>
-          <Card style={{ borderRadius: "25px" }}>
-            <Card.Content
-              style={{
-                paddingRight: 150,
-                paddingTop: 30,
-                fontWeight: "bold",
-                fontFamily: "Helvatica",
-              }}
-            >
-              {/* <ShadowBoxWithHeader
-                margined={0}
-                padding={30}
-                width={"75vh"}
-                unanimated
-                className="d-flex flex-column"
-              >
-                <Card.Content style={{ paddingRight: 480, paddingBottom: 40 }}>
-                  <Grid>
-                    <Grid.Row>
-                      <Image
-                        size="medium"
-                        src={advertisements.employer?.image.imageUrl}
-                      />
-                      <Card.Content style={{ paddingLeft: 50 }}>
-                        se
-                      </Card.Content>
-                    </Grid.Row>
-                  </Grid>
-                </Card.Content>
-              </ShadowBoxWithHeader> */}
-              <Card.Content style={{ paddingLeft: 25 }}>
-                Şehir: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                    paddingLeft: 55,
-                  }}
-                >
-                  {advertisements.city?.name}
-                </span>
-              </Card.Content>
-              <Card.Content style={{ paddingTop: 35, paddingLeft: 78 }}>
-                İş Pozisyonu: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp;&nbsp; &nbsp; &nbsp;{" "}
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                    paddingLeft: 25,
-                  }}
-                >
-                  {advertisements.position?.name}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 35, paddingLeft: 20 }}>
-                Minimum Ücret: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                    paddingRight: 12,
-                  }}
-                >
-                  {advertisements.minSalary}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 35, paddingLeft: 30 }}>
-                Maximum Ücret: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp;{" "}
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                    paddingRight: 25,
-                  }}
-                >
-                  {advertisements.maxSalary}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 35, paddingRight: 18 }}>
-                Pozisyon Adedi: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                  }}
-                >
-                  {advertisements.openPosition}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 35, paddingLeft: 72 }}>
-                Çalışma Zamanı: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                    paddingRight: 20,
-                  }}
-                >
-                  {advertisements.workTime?.workTime}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 35, paddingLeft: 75 }}>
-                Çalışma Tipi: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                  }}
-                >
-                  {advertisements.workType?.workType}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 35, paddingLeft: 65 }}>
-                Yayın Tarihi: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                    paddingRight: 25,
-                  }}
-                >
-                  {advertisements.releaseDate}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 35, paddingLeft: 78 }}>
-                Son başvuru tarihi: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp;{" "}
-                <span
-                  style={{
-                    fontWeight: "normal",
-                    fontFamily: "Arial",
-                    paddingRight: 36,
-                  }}
-                >
-                  {advertisements.applicationDeadline}
-                </span>
-              </Card.Content>
-
-              <Card.Content style={{ paddingTop: 40, paddingLeft: 480 }}>
-                <Button
-                  color="teal"
-                  animated
-                  //as={Link}
-                  //to={`/cvs/${cvs.id}`}
-                  //onClick={handle()}
-                >
-                  <Button.Content visible>İlana Başvur</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="check" />
-                  </Button.Content>
-                </Button>
-              </Card.Content>
-            </Card.Content>
-          </Card>
-
-          <Card.Group
-            style={{ paddingLeft: 100, paddingTop: 10, paddingBottom: 100 }}
-            itemsPerRow={1}
-          >
-            <Card style={{ borderRadius: "25px" }} fluid>
+      {/* <div style={{ paddingLeft: 250, paddingRight: 200 }}>
+        <Image
+          src={
+            "https://assets.new.siemens.com/siemens/assets/api/uuid:51e9b5ab-2621-47d0-8f00-ba076a460cb0/width:2000/quality:high/key-visual-smartoffice-1920x1080px.jpg"
+          }
+        />
+      </div> */}
+      <div className="cr7">
+        <div className="col">
+          <div style={{ paddingLeft: 150, paddingRight: 128 }}>
+            <GradientBox>
               <div
-                style={{ paddingLeft: 150, paddingTop: 25, paddingBottom: 20 }}
-              >
-                <Image
-                  floated="left"
-                  size="small"
-                  src={advertisements.employer?.image.imageUrl}
-                />
-              </div>
-              
-              <Card.Content
                 style={{
-                  fontWeight: "bold",
-                  fontFamily: "Helvatica",
-                  paddingTop: 30,
-                  paddingRight: 60
+                  paddingTop: 80,
+                  paddingRight: 900,
+                  backgroundColor: "#7f007f",
                 }}
               >
-                Firma Adı: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp;{" "}
-                <span style={{ fontWeight: "normal", fontFamily: "Arial" }}>
-                  {advertisements.employer?.companyName}
-                </span>
-                <Card.Content style={{ paddingTop: 30, paddingLeft: 85 }}>
-                  Email: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp;{" "}
-                  <span
-                    style={{
-                      fontWeight: "normal",
-                      fontFamily: "Arial",
-                      paddingLeft: 25,
-                    }}
-                  >
-                    {advertisements.employer?.email}
-                  </span>
-                </Card.Content>
-                <Card.Content style={{ paddingTop: 30, paddingLeft: 15 }}>
-                  Telefon: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp;{" "}
-                  <span
-                    style={{
-                      fontWeight: "normal",
-                      fontFamily: "Arial",
-                      paddingLeft: 18,
-                    }}
-                  >
-                    {advertisements.employer?.phoneNumber}
-                  </span>
-                </Card.Content>
-                <Card.Content style={{ paddingTop: 30, paddingLeft: 30 }}>
-                  Web Sitesi: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp;{" "}
-                  <a
-                    href={advertisements.employer?.webSite}
-                    target={"_blank"}
-                    rel="noopener noreferrer"
-                  >
-                    <Button size="mini" animated color="twitter">
-                      <Button.Content visible>
-                        <Icon name="world" color="olive" />
+                <ShadowBoxWithHeader
+                  margined={-20}
+                  padding={40}
+                  width={"140vh"}
+                  unanimated
+                  className="d-flex flex-column"
+                ></ShadowBoxWithHeader>
+              </div>
+            </GradientBox>
+          </div>
+
+          <div style={{ paddingLeft: 110 }}>
+            <ShadowBoxWithHeader
+              margined={-269}
+              padding={40}
+              width={"182vh"}
+              unanimated
+              className="d-flex flex-column"
+            >
+              <Card fluid>
+                <ShadowBoxWithHeader
+                  margined={-100}
+                  padding={40}
+                  width={"173vh"}
+                  unanimated
+                  className="d-flex flex-column"
+                >
+                  <Grid divided="vertically">
+                    <Grid.Row style={{ paddingBottom: 30 }}>
+                      <div>
+                        <div style={{ paddingLeft: 15 }}>
+                          <Image
+                            style={{ height: 115 }}
+                            floated="left"
+                            size="small"
+                            bordered="40px solid transparent"
+                            src={advertisements.employer?.image.imageUrl}
+                          />
+                        </div>{" "}
+                        {""}{" "}
+                        <div
+                          style={{
+                            position: "absolute",
+                            paddingTop: 80,
+                            paddingLeft: 185,
+                            fontSize: 21,
+                            fontFamily: "Trebuchet MS",
+                          }}
+                        >
+                          {advertisements.employer?.companyName}
+                        </div>
+                        <div
+                          style={{
+                            position: "absolute",
+                            paddingTop: 110,
+                            paddingLeft: 185,
+                            fontSize: 19,
+                          }}
+                        >
+                          {advertisements.employer?.waitingUpdate ? (
+                            <span style={{ color: "#bf00bf" }}>
+                              (Son güncelleme onay bekliyor)
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </div>
+                        <div
+                          style={{
+                            position: "absolute",
+                            paddingTop: 85,
+                            paddingLeft: 1380,
+                          }}
+                        >
+                          
+                          <div >
+                               
+                               <Button
+                               //size="small"
+                               style={{
+                                //backgroundColor: "white",
+                               // color: "purple",
+                                //border: "2px solid purple",
+                                padding: "10px 45px",
+                              }}
+                                 //icon="edit"
+                                 content="Ayarlar"
+                                 color="purple"
+                                 inverted
+                               />
+                               <FaEllipsisV
+                               //size="small"
+                            style={{ color: "purple", paddingLeft: 5 }}
+                          />
+                           </div>
+                            
+                          
+                        </div>
+                      </div>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 10,
+                          paddingLeft: 15,
+                        }}
+                      >
                         Web Site
-                      </Button.Content>
-                      <Button.Content hidden>
-                        <Icon name="angle double right" />
-                      </Button.Content>
-                    </Button>
-                  </a>
-                </Card.Content>
-                <Card.Content style={{ paddingTop: 30, paddingLeft: 47 }}>
-                  Detay: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  <Button
-                    size="mini"
-                    animated
-                    as={Link}
-                    to={`/employers/${advertisements.employer?.id}`}
-                  >
-                    <Button.Content visible>Şirket Detayları</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="angle double right" />
-                    </Button.Content>
-                  </Button>
-                </Card.Content>
-              </Card.Content>
-            </Card>
-          </Card.Group>
-        </Card.Group>
-      </div>
-      <div style={{ paddingLeft: 190, paddingTop: 1 }}>
-        <Card.Group style={{ paddingTop: 50 }} itemsPerRow={2}>
-          <Card fluid color={"black"} style={{ borderRadius: "25px" }}>
-            <Card.Content
-              style={{ paddingBottom: 20, paddingTop: 20, paddingRight: 650 }}
-              header="İlan Açıklaması"
-            />
-            <Card.Content style={{ paddingBottom: 20, paddingTop: 25 }}>
-              {advertisements.jobDescription}
-            </Card.Content>
-          </Card>
-        </Card.Group>
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 10,
+                          paddingLeft: 220,
+                          fontFamily: "monospace",
+                          opacity: 0.6,
+                        }}
+                      >
+                        {advertisements.employer?.webSite}
+                      </div>
+
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 55,
+                          paddingLeft: 15,
+                        }}
+                      >
+                        Email Adresi
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 55,
+                          paddingLeft: 220,
+                          fontFamily: "monospace",
+                          opacity: 0.6,
+                        }}
+                      >
+                        {advertisements.employer?.email}
+                      </div>
+
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 10,
+                          paddingLeft: 750,
+                        }}
+                      >
+                        Kuruluş Yılı
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 10,
+                          paddingLeft: 950,
+                          fontFamily: "monospace",
+                          opacity: 0.6,
+                        }}
+                      >
+                        {advertisements.employer?.foundationYear}
+                      </div>
+
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 55,
+                          paddingLeft: 750,
+                        }}
+                      >
+                        Telefon Numarası
+                      </div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          paddingTop: 55,
+                          paddingLeft: 950,
+                          fontFamily: "monospace",
+                          opacity: 0.6,
+                        }}
+                      >
+                        {advertisements.employer?.phoneNumber}
+                      </div>
+                      {/*  */}
+                    </Grid.Row>
+                  </Grid>
+                </ShadowBoxWithHeader>
+                <div style={{ paddingTop: 70 }}>
+                  <Card style={{ paddingTop: 50 }} fluid>
+                    <ShadowBoxWithHeader
+                      margined={-80}
+                      padding={40}
+                      width={"170vh"}
+                      unanimated
+                      className="d-flex flex-column"
+                    >
+                      <div style={{ position: "absolute", paddingLeft: 650 }}>
+                        <Link
+                          as={Link}
+                          to={`/advertisement/detail/${advertisements.id}`}
+                        >
+                          <Button
+                            style={{
+                              color: "black",
+                              padding: "8px 10px",
+                              fontFamily: "monospace",
+                              opacity: 0.6,
+                              backgroundColor: "white",
+                              //borderBottomStyle: "inset",
+                              //borderColor: "purple",
+                            }}
+                            //className="tutrte"
+                          >
+                            Hakkında
+                          </Button>
+                        </Link>
+                        <Link
+                          as={Link}
+                          to={`/advertisement/details/${advertisements.id}`}
+                        >
+                        <Button
+                          style={{
+                            backgroundColor: "white",
+                            color: "black",
+                            padding: "8px 5px",
+                            fontFamily: "monospace",
+
+                            opacity: 0.6,
+                          }}
+                        >
+                          İş ilanı
+                        </Button>
+                        </Link>
+                      </div>
+                    </ShadowBoxWithHeader>
+                  </Card>
+                </div>
+              </Card>
+            </ShadowBoxWithHeader>
+          </div>
+        </div>
       </div>
     </div>
   );

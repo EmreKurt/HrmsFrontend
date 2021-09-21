@@ -17,6 +17,8 @@ import JobPostingContactİnformation from "../pages/JobCv/JobPostingContactİnfo
 import JobSeekerList from "../pages/JobSeekerList";
 import LoginList from "../pages/LoginList";
 import HomePageWithTranslation from "../pages/HomePage";
+import JobAdvertisementDetailPage from "../pages/Job/JobAdvertisementDetailPage";
+import JobAdvertisementPageTwo from "../pages/Job/JobAdvertisementPageTwo";
 
 export default function Board() {
   return (
@@ -25,13 +27,18 @@ export default function Board() {
       <Grid>
         <Grid.Row>
           <Grid.Column width={16}>
-          <Route exact path="/" component={HomePageWithTranslation}/> 
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/home" component={HomePageWithTranslation}/> 
             <Route exact path="/cv" component={CvList} />
             <Route exact path="/cv/:id" component={CvDetail} />
             <Route exact path="/cvs" component={CvList} />
              <Route exact path="/cvs/:id" component={JobPostingApplication} /> 
             <Route exact path="/advertisements" component={JobAdvertisementList}/>
             <Route exact path="/advertisements/:id" component={JobAdvertisementDetail}/>
+            <Route exact path="/advertisement/detail" component={JobAdvertisementList}/>
+            <Route exact path="/advertisement/detail/:id" component={JobAdvertisementDetailPage}/>
+            <Route exact path="/advertisement/details" component={JobAdvertisementList}/>
+            <Route exact path="/advertisement/details/:id" component={JobAdvertisementPageTwo}/>
             {/* <Route exact path="/jobSeeker" component={JobSeekerList}/> */}
             <Route exact path="/jobPostingApplications" component={JobPostingApplication}/>
             <Route exact path="/jobPostingSchools" component={JobPostingSchools}/>
@@ -41,7 +48,7 @@ export default function Board() {
             <Route exact path="/jobPostingBiography" component={JobPostingBiography}/>
             <Route exact path="/jobPostingContactİnformation" component={JobPostingContactİnformation}/>
             <Route exact path="/login" component={LoginList}/>
-            <Route exact path="/home" component={Home}/>
+            
           </Grid.Column>
         </Grid.Row>
       </Grid>

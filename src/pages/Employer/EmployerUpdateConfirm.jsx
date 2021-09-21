@@ -93,7 +93,7 @@ export default function EmployerUpdateConfirm() {
                             animated
                             basic
                             color="green"
-                            onClick={(e) => confirmStatusTrue(employer.id, 1)}
+                            onClick={(e) => confirmStatusTrue(employer.id, 5)}
                           >
                             <Button.Content visible>Onayla</Button.Content>
                             <Button.Content hidden>

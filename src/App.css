@@ -2,7 +2,6 @@
   text-align: center;
   background-color: #fffcfc;
   width: auto;
-
 }
 
 .ui.main.container {
@@ -10,16 +9,15 @@
   position: relative;
 }
 
-.text-secondary{
+.text-secondary {
   color: #333333;
 }
 
-.turt{
-  
+.turt {
   background-image: url("https://cdn-res.keymedia.com/cms/images/us/036/0248_637224539076143454.jpg");
   height: 130vh;
   background-size: cover;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
 }
 
 /* .tear{
@@ -27,8 +25,7 @@
   height: 25px;
 } */
 
-.erte{
-  
+.erte {
   color: #bf00bf;
   margin-right: 10px;
   margin-left: 200px;
@@ -36,35 +33,45 @@
   font-size: large;
 }
 
-.loog{
+.jobImages {
+  width: 1150px;
+}
+
+.sileyn {
+  position: absolute;
+
+  left: 1190px;
+  top: 12px;
+}
+
+.loog {
   margin-right: 180px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.telk{
-border-width: 1px;
-margin-bottom: 25px;
-margin-top: 15px;
-height: 100px;;
+.telk {
+  border-width: 1px;
+  margin-bottom: 25px;
+  margin-top: 15px;
+  height: 100px;
 }
 
-.orte{
+.orte {
   margin-right: 110px;
   margin-top: 20px;
   padding-bottom: 15px;
 }
 
-.last{
+.last {
   margin-left: 200px;
 }
 
-.erak{
-  
+.erak {
   text-decoration: underline;
 }
 
-.asda{
+.asda {
   font-size: large;
 }
 
@@ -73,7 +80,7 @@ height: 100px;;
   margin-top: 1rem;
 }
 
-.sear{
+.sear {
   margin-right: 15px;
   color: #333333;
   margin-left: 15px;
@@ -81,50 +88,44 @@ height: 100px;;
 
 .navi {
   background-color: #fffcfc !important;
-  
 }
 
-
-
-.aer{
+.aer {
   color: #f29382;
 }
-.ulti{
+.ulti {
   color: #d7eddc;
 }
 
-.ds{
+.ds {
   display: inline-block;
 }
 
-.mt10{
+.mt10 {
   margin-top: 10px;
 }
 
-.fl-r{
+.fl-r {
   float: right;
 }
 
-
-.ac{
- font-size: 28px;
- font-style: italic;
- font-variant: inherit;
+.ac {
+  font-size: 28px;
+  font-style: italic;
+  font-variant: inherit;
 }
 
-
-.login{
-  background-color: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fresimdiyari.com%2F_data%2Fi%2Fupload%2F2012%2F10%2F11%2F20121011142538-0d933501-me.jpg&imgrefurl=https%3A%2F%2Fresimdiyari.com%2Findex.php%3F%2Fcategory%2Farkaplan_resimleri&tbnid=t8AhP__YU4Y7oM&vet=12ahUKEwjjhKr447rxAhWFDuwKHVk3CLAQMygIegUIARDgAQ..i&docid=8ADcjsuOK4fNhM&w=738&h=416&q=arka%20plan%20resimleri&ved=2ahUKEwjjhKr447rxAhWFDuwKHVk3CLAQMygIegUIARDgAQ#imgrc=t8AhP__YU4Y7oM&imgdii=4BBddwkaXmjrFM")
+.login {
+  background-color: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fresimdiyari.com%2F_data%2Fi%2Fupload%2F2012%2F10%2F11%2F20121011142538-0d933501-me.jpg&imgrefurl=https%3A%2F%2Fresimdiyari.com%2Findex.php%3F%2Fcategory%2Farkaplan_resimleri&tbnid=t8AhP__YU4Y7oM&vet=12ahUKEwjjhKr447rxAhWFDuwKHVk3CLAQMygIegUIARDgAQ..i&docid=8ADcjsuOK4fNhM&w=738&h=416&q=arka%20plan%20resimleri&ved=2ahUKEwjjhKr447rxAhWFDuwKHVk3CLAQMygIegUIARDgAQ#imgrc=t8AhP__YU4Y7oM&imgdii=4BBddwkaXmjrFM");
 }
 
 .bg {
   background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
-  height: 50vh;
+  height: 60vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: center;
-  
 }
 
 /* .footer{
@@ -141,9 +142,6 @@ height: 100px;;
   color: rgb(255, 255, 255);
 } */
 
-.ar{
+.ar {
   margin-top: 150px;
 }
-
-
-

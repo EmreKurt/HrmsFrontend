@@ -22,6 +22,7 @@ export default function SignedIn() {
   };
 
   const [cv, setCv] = useState([]);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     let cvService = new CvService();
@@ -35,11 +36,9 @@ export default function SignedIn() {
       <Grid>
         {authItem[0].user.userType === 1 && (
           <div>
-            {cv.image?.map((images) => (
-              <img
-                width="30"
-                height="30"
-                size="tiny"
+              {cv.image?.map((images) => (
+              <Image
+                size="mini"
                 src={images?.imageUrl}
                 key={images?.id}
                 style={{ borderRadius: "50%" }}

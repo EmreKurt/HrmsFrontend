@@ -7,8 +7,8 @@ export default function SignedOut({signIn}) {
     <div>
 
         <Button.Group>
-        
-        <Link to={`/login`}> <Button size="large" primary style={{marginLeft:'0.5em',position:"absolute"}} >Giriş Yap</Button></Link>
+        <div style={{paddingRight:120}}>
+        <Link to={`/login`}> <Button size="large" primary style={{marginLeft:'0.3em',position:"absolute"}} >Giriş Yap</Button></Link></div>
           <Button.Or />
           <Link  to={`/recort`}> <Button size="large" style={{position:"absolute"}} positive>Kayıt Ol</Button></Link>
         </Button.Group>

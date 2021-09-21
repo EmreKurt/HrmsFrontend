@@ -27,6 +27,7 @@ import UpdateLanguage from "../pages/CvUpdate/UpdateLanguage";
 import UpdateContactİnformation from "../pages/CvUpdate/UpdateContactİnformation";
 import Home from "../pages/Home";
 import JobPostingApplication from "../pages/Job/JobPostingApplication";
+import JobAdvertisementDetailPage from "../pages/Job/JobAdvertisementDetailPage";
 
 export default function Dashboard() {
 

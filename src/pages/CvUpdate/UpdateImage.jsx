@@ -35,7 +35,7 @@ export default class UpdateImage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{paddingTop:65}}>
 
           {/* <Card.Content header="Resim Yükle" /> */}
           <Card.Content style={{}}>

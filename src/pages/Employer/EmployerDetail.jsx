@@ -4,12 +4,16 @@ import AdvertisementService from "../../services/advertisementService";
 import EmployerService from "../../services/employerService";
 import { Header, Table, Icon, Card, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import JobSeekerService from "../../services/jobSeekerService";
+import { useSelector } from "react-redux";
 
 export default function EmployerDetail() {
   let { id } = useParams();
 
   const [employer, setEmployer] = useState({});
   const [advertisement, setAdvertisement] = useState([]);
+
+
 
   useEffect(() => {
     let employerService = new EmployerService();
@@ -42,7 +46,7 @@ export default function EmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell>{employer.companyName}</Table.Cell>
+            <Table.Cell>{employer?.companyName}</Table.Cell>
           </Table.Row>
 
           <Table.Row>
@@ -81,7 +85,7 @@ export default function EmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell>{employer.email}</Table.Cell>
+            <Table.Cell>{employer?.email}</Table.Cell>
           </Table.Row>
 
           <Table.Row>
@@ -93,7 +97,7 @@ export default function EmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell>{employer.phoneNumber}</Table.Cell>
+            <Table.Cell>{employer?.phoneNumber}</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>
@@ -138,11 +142,12 @@ export default function EmployerDetail() {
             </Table.Body>
           </Table>
         </Card.Content>
-        <Card.Content extra>
+        
+      </Card>
+      <Card.Content extra>
           <Icon name="list" />
           {advertisement?.length} Adet İş ilanı mevcut
         </Card.Content>
-      </Card>
     </div>
   );
 }

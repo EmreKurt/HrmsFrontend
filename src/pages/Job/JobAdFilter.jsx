@@ -1,3 +1,4 @@
+import { clear } from "dom-helpers";
 import React, { useState, useEffect } from "react";
 import {
   Button,
@@ -40,6 +41,16 @@ export default function JobAdFilter({ clickEvent }) {
       .then((result) => setWorkTimes(result.data.data));
   }, []);
 
+  const reset = () => {
+      //setCurrentPage(1)
+      setCityIndex(0)
+      //jobPositionIndex.checked=false
+      //setJobPositionIndex(0)
+      //workTimeIndex(0)
+      //workPlaceIndex(0)
+      //console.log(data.data.data)
+  }
+
   const [cityIndex, setCityIndex] = useState([]);
   const handleChangeCity = (e, { value }) => {
     setCityIndex(value);
@@ -47,6 +58,7 @@ export default function JobAdFilter({ clickEvent }) {
 
   const [jobPositionIndex] = useState([]);
   const handleChangeJobPosition = (e, { value, checked }) => {
+   
     if (checked) {
       jobPositionIndex.push(value);
     } else {
@@ -155,11 +167,12 @@ export default function JobAdFilter({ clickEvent }) {
             ))}
           </Segment>
           </div>
-          <div style={{paddingTop:30}}>
+          <div style={{paddingTop:30,}}>
           <Button
+          style={{backgroundColor:"#bf02d1",color:"white",boxShadow:"2px 2px 8px #000"}}
             type="button"
             fluid
-            color="green"
+           // color="#c008d1"
             onClick={() =>
               clickEvent({
                 cityId: cityIndex,
@@ -171,6 +184,12 @@ export default function JobAdFilter({ clickEvent }) {
           >
             Filtrele
           </Button>
+          <div style={{paddingTop:15}}>
+          <Button style={{color:"white",backgroundColor:"#b2b2b2",boxShadow:"2px 2px 8px #000"}} fluid type="button" 
+          onClick={() => reset()}>
+            Reset
+          </Button>
+          </div>
           </div>
         </Segment>
       </Card>
